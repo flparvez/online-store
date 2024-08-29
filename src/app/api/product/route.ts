@@ -56,13 +56,14 @@ export const GET =async ( request:Request) =>{
       const products = await Product.find(filter);
 
       return new NextResponse(
-        JSON.stringify({message:"Product fetch succesfully",products}),{status:200}
+        JSON.stringify({products}),{status:200}
       )
   } catch (error:any) {
     return new NextResponse ("Error in fetching products: " + error.message,{ status:400})
   }
 }
 
+// create product
 export const POST = async (request: Request) => {
 
   try {
