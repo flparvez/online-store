@@ -21,18 +21,18 @@ export const UserApi = createApi({
         query: () => 'users/me',
     }),
 
-    // addCategory: builder.mutation({
+    loginUser: builder.mutation({
     
-    //   query: (body) =>      ({
+      query: (body) =>      ({
 
-    //      url: `categories?userId=${id}`,
-    //     method: 'POST',
-    //     body,
-    //   }),
-    //   invalidatesTags: [{ type: 'Category', id: 'LIST' }],
-    // }),
+         url: 'users/login',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: [{ type: 'login', id: 'LIST' }],
+    }),
   }),
 })
 
 
-export const {useGetUsersQuery,useGetSingleUserQuery  } = UserApi;
+export const {useGetUsersQuery,useGetSingleUserQuery, useLoginUserMutation } = UserApi;

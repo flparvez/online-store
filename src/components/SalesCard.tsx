@@ -1,35 +1,68 @@
-/* eslint-disable @next/next/no-img-element */
-/**
- * eslint-disable @next/next/no-img-element
- *
- * @format
- */
-
-/** @format */
-
-import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 export type SalesProps = {
+  key: number,
+  category: string;
   name: string;
-  email: string;
-  saleAmount: string;
+  price: string;
+  img: string;
 };
 
-export default function SalesCard(props: SalesProps) {
+
+export function ProductList(props: SalesProps) {
+
+  const product =props?.data;
+
   return (
-    <div className="  flex flex-wrap justify-between gap-3 ">
-      <section className="flex justify-between gap-3 ">
-        <div className=" h-12 w-12 rounded-full bg-gray-100 p-1">
-          <img width={200} height={200} src={`https://api.dicebear.com/7.x/lorelei/svg?seed=${props.name}`} alt="avatar" />
-        </div>
-        <div className="text-sm">
-            <p>{props.name}</p>
-            <div className="text-ellipsis overflow-hidden whitespace-nowrap w-[120px]  sm:w-auto  text-gray-400">
-                {props.email}
-            </div>
-        </div>
-      </section>
-        <p>{props.saleAmount}</p>
+
+    <div>
+
+    <Table>
+      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="sm:w-[200px]">Category Name</TableHead>
+         
+          <TableHead>Product Name</TableHead>
+          <TableHead className="sm:w-[100px]">Edit</TableHead>
+          <TableHead className="sm:w-[100px]">Delete</TableHead>
+          <TableHead className="text-end">Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      {product?.map((item, i) => (
+          
+      
+  
+      <TableBody key={i}>
+    
+      
+          <TableRow >
+            <TableCell className="">{item.category}</TableCell>
+            <TableCell className="">{item.name}</TableCell>
+            <TableCell>Edit</TableCell>
+            <TableCell className="w-4">Delete</TableCell>
+            <TableCell className="text-end">{item.price}</TableCell>
+          </TableRow>
+        
+   
+      </TableBody>
+    ))}
+      <TableFooter>
+        <TableRow>
+          <TableCell colSpan={5}>Total</TableCell>
+          <TableCell className="text-right">$2,500.00</TableCell>
+        </TableRow>
+      </TableFooter>
+    </Table>
     </div>
-  );
+  )
 }

@@ -7,10 +7,12 @@ import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { useLoginUserMutation } from "@/store/services/UserApi";
 
 
 
 function Login() {
+  const [loginUser] = useLoginUserMutation();
   const router = useRouter();
 
   const [user, setUser] = useState({
@@ -23,8 +25,8 @@ function Login() {
   const onLogin = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/users/login", user);
-      console.log(response.data);
+      const response = await loginUser(user).unwrap();
+      console.log(response);
       toast.success("Login Successfully");
       // router.push("/profile");
       router.push("/");

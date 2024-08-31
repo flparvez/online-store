@@ -51,9 +51,9 @@ export default function AddProductForm() {
       </LabelInputContainer>
   <LabelInputContainer className="mb-4 ">
       <Label htmlFor="category">Category Sellect</Label>
-      <select {...register("category", { required: true })}  className="select select-bordered">
-    <option disabled selected>Pick one</option>
-    <option>Star Wars</option>
+      <select defaultValue="all" {...register("category", { required: true })}  className="select select-bordered">
+   
+    <option value="all" selected>All</option>
     <option>Harry Potter</option>
     <option>Lord of the Rings</option>
     <option>Planet of the Apes</option>

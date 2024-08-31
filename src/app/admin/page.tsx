@@ -2,11 +2,13 @@
 /** @format */
 
 import PageTitle from "@/components/PageTitle";
-import Image from "next/image";
+
 import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
 import Card, { CardContent, CardProps } from "@/components/Card";
-import BarChart from "@/components/BarChart";
-import SalesCard, { SalesProps } from "@/components/SalesCard";
+
+import  { ProductList, SalesProps } from "@/components/SalesCard";
+import { useGetProductsQuery } from "@/store/services/prodcutApi";
+
 
 
 const cardData: CardProps[] = [
@@ -36,35 +38,15 @@ const cardData: CardProps[] = [
   }
 ];
 
-const uesrSalesData: SalesProps[] = [
-  {
-    name: "Olivia Martin",
-    email: "olivia.martin@email.com",
-    saleAmount: "+$1,999.00"
-  },
-  {
-    name: "Jackson Lee",
-    email: "isabella.nguyen@email.com",
-    saleAmount: "+$1,999.00"
-  },
-  {
-    name: "Isabella Nguyen",
-    email: "isabella.nguyen@email.com",
-    saleAmount: "+$39.00"
-  },
-  {
-    name: "William Kim",
-    email: "will@email.com",
-    saleAmount: "+$299.00"
-  },
-  {
-    name: "Sofia Davis",
-    email: "sofia.davis@email.com",
-    saleAmount: "+$39.00"
-  }
-];
+
+// const {data}:SalesProps[] = useGetProductsQuery()
+  
+  
+
 
 export default function Home() {
+  const {data,isLoading} = useGetProductsQuery()
+  console.log(data?.products)
   return (
     
     <div className="flex flex-col gap-5  w-full">
@@ -82,26 +64,17 @@ export default function Home() {
         ))}
       </section>
       <section className="">
-        {/* <CardContent>
-          <p className="p-4 font-semibold">Overview</p>
-
-          <BarChart />
-        </CardContent> */}
+     
         <CardContent className="w-full">
           <section>
             <p>Product</p>
             <p className="text-sm text-gray-400">
-              You made 265 sales this month.
+            All Product
             </p>
           </section>
-          {uesrSalesData.map((d, i) => (
-            <SalesCard
-              key={i}
-              email={d.email}
-              name={d.name}
-              saleAmount={d.saleAmount}
-            />
-          ))}
+<ProductList data={data && data?.products} />
+
+        
         </CardContent>
 
         {/*  */}
