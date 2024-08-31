@@ -1,16 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit'
 import productSlice from './features/products/productSlice'
 import { prodcutsApi } from './services/prodcutApi'
+import { categoryApi } from './services/CategoryApi'
+import { UserApi } from './services/UserApi'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
 export const store = configureStore({
   reducer: {
     [prodcutsApi.reducerPath]: prodcutsApi.reducer,
-    productsR: productSlice,
+    [categoryApi.reducerPath]: categoryApi.reducer,
+    [UserApi.reducerPath]: UserApi.reducer,
+  
     
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(prodcutsApi.middleware),
+    getDefaultMiddleware().concat(categoryApi.middleware).concat(UserApi.middleware).concat(prodcutsApi.middleware),
 })
 
 

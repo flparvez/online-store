@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/AddProductForm.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/AddProductForm.tsx", "src/store/services/prodcutApi.js", "src/store/services/CategoryApi.js"],
   "exclude": ["node_modules"]
 }
