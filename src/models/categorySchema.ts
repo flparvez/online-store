@@ -6,6 +6,7 @@ import  { Schema, model,models  } from 'mongoose';
 const categorySchema = new Schema({
   title: { type: String, required: true, unique: true },
   description: { type: String },
+  image: { type: String },
  user : { type: Schema.Types.ObjectId, ref: 'User'}
   // products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
 

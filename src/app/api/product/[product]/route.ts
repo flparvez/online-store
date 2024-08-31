@@ -62,7 +62,7 @@ try {
   if (!product) {
 
     return new NextResponse (
-        JSON.stringify({message:"Category not found or does not exist"}),
+        JSON.stringify({message:"Product not found or does not exist"}),
         {status:404});
 
   }
@@ -75,15 +75,143 @@ try {
 }
 }
 
+
+
 // edit single product
 export const PATCH =async (request:Request,context: { params:any})  =>{
-
+    const productId = context.params.product;
     try {
+        const body = await request.json();
+        const {
+            name,
+            description,
+            price,
+            images,
+            stock,
+            sold
+        } = body;
         const { searchParams } = new URL(request.url);
         const userId = searchParams.get("userId");
         const categoryId = searchParams.get("categoryId");
+
+
         
+  // check userId and categoryId
+  if (!userId || !Types.ObjectId.isValid(userId!)) {
+    return new NextResponse(
+        JSON.stringify({message:"Inavlid or missing userId"}),
+        {status:400}
+    )
+    }
+    
+    if (!categoryId || !Types.ObjectId.isValid(categoryId!)) {
+        return new NextResponse(
+            JSON.stringify({message:"Inavlid or missing CategoryId"}),
+            {status:400}
+        )
+    }
+    if (!productId || !Types.ObjectId.isValid(productId!)) {
+        return new NextResponse(
+            JSON.stringify({message:"Inavlid or missing productId"}),
+            {status:400}
+        )
+    }
+
+    await connectDb();
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+        return new NextResponse (
+            JSON.stringify({message:"User not found"}),
+            {status:404}
+        )
+    }
+
+  const product = await Product.findOne({_id:productId,user:userId})
+
+if (!product) {
+    return new NextResponse (
+        JSON.stringify({message:"Product not found"}),
+        {status:404}
+    ) }
+const updatedProduct = await Product.findByIdAndUpdate(
+    productId,
+    {
+        name,
+        description,
+        price,
+        images,
+        stock,
+        sold,
+    },
+    { new: true }
+  
+)
+
+return new NextResponse(
+    JSON.stringify({message:"Product updated successfully",product:updatedProduct}),{status:200}
+  
+)
+  
     } catch (error:any) {
         return new NextResponse("Product Edit Failed",{status:400})
     }
 }
+
+//  DELETE PRODUCT
+
+export const DELETE =async (request:Request,context: { params:any}) => {
+    const productId = context.params.product;
+
+    try {
+   
+    const { searchParams } = new URL(request.url);
+        const userId = searchParams.get("userId");
+ 
+
+
+        
+  // check userId and categoryId
+  if (!userId || !Types.ObjectId.isValid(userId!)) {
+    return new NextResponse(
+        JSON.stringify({message:"Inavlid or missing userId"}),
+        {status:400}
+    )
+    }
+    
+ 
+    if (!productId || !Types.ObjectId.isValid(productId!)) {
+        return new NextResponse(
+            JSON.stringify({message:"Inavlid or missing productId"}),
+            {status:400}
+        )
+    }
+
+    await connectDb();
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+        return new NextResponse (
+            JSON.stringify({message:"User not found"}),
+            {status:404}
+        )
+    }
+  
+    const product = await Product.findOne({_id:productId,user:userId})
+
+    if (!product) {
+        return new NextResponse (
+            JSON.stringify({message:"Product not found"}),
+            {status:404}
+        ) }
+
+        await Product.findByIdAndDelete(productId)
+        return new NextResponse(JSON.stringify({message:"Product deleted successfully"}), {status:200});
+
+ 
+} catch (error:any) {
+    return new NextResponse("Product Delete Failed",{status:400})
+}
+} 

@@ -10,50 +10,11 @@ export const GET =async ( request:Request) =>{
 
   try {
 
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get("userId");
-    const categoryId = searchParams.get("categoryId");
-    
-    // check userId and categoryId
-    if (!userId || !Types.ObjectId.isValid(userId!)) {
-      return new NextResponse(
-          JSON.stringify({message:"Inavlid or missing userId"}),
-          {status:400}
-      )
-      }
-      
-      if (!categoryId || !Types.ObjectId.isValid(categoryId!)) {
-          return new NextResponse(
-              JSON.stringify({message:"Inavlid or missing CategoryId"}),
-              {status:400}
-          )
-      }
-
       await connectDb();
 
-      const user = await User.findById(userId);
   
-      if (!user) {
-          return new NextResponse (
-              JSON.stringify({message:"User not found"}),
-              {status:404}
-          )
-      }
-      const category = await Category.findOne({_id:categoryId,user:userId});
-      
-      if (!category) {
-          return new NextResponse (
-              JSON.stringify({message:"Category not found or does not exist"}),
-              {status:404}
-          )
-      }
-    
-      const filter:any ={
-        user: new Types.ObjectId(user),
-        category : new Types.ObjectId(category)
-      } 
-
-      const products = await Product.find(filter);
+      const products = await Product.find()
+      // const products = await Product.find(filter).sort({createdAt:"asc"})
 
       return new NextResponse(
         JSON.stringify({products}),{status:200}
@@ -70,12 +31,13 @@ export const POST = async (request: Request) => {
     
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
-  const categoryId = searchParams.get("categoryId");
+ 
   
   const body = await request.json();
   const {
     name,
     description,
+    category,
     price,
     images,
     stock,
@@ -90,13 +52,7 @@ export const POST = async (request: Request) => {
     )
     }
     
-    if (!categoryId || !Types.ObjectId.isValid(categoryId!)) {
-        return new NextResponse(
-            JSON.stringify({message:"Inavlid or missing CategoryId"}),
-            {status:400}
-        )
-    }
-
+   
     await connectDb();
 
     const user = await User.findById(userId);
@@ -107,24 +63,19 @@ export const POST = async (request: Request) => {
             {status:404}
         )
     }
-    const category = await Category.findOne({_id:categoryId,user:userId});
+
     
-    if (!category) {
-        return new NextResponse (
-            JSON.stringify({message:"Category not found or does not exist"}),
-            {status:404}
-        )
-    }
-  
+
     const newProduct = new  Product({
       name,
       description,
+      category,
       price,
       images,
       stock,
       sold,
       user: new Types.ObjectId(user),
-      category: new Types.ObjectId(category)
+ 
     })
  await newProduct.save();
   
