@@ -4,10 +4,13 @@
 import PageTitle from "@/components/PageTitle";
 
 import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
-import Card, { CardContent, CardProps } from "@/components/Card";
+
 
 import  { ProductList, SalesProps } from "@/components/SalesCard";
 import { useGetProductsQuery } from "@/store/services/prodcutApi";
+import AdminProductTile from "@/components/ProductListAdmin";
+import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 
 
 
@@ -46,6 +49,14 @@ const cardData: CardProps[] = [
 
 export default function Home() {
   const {data,isLoading} = useGetProductsQuery()
+
+  // function handleDelete(getCurrentProductId) {
+  //   dispatch(deleteProduct(getCurrentProductId)).then((data) => {
+  //     if (data?.payload?.success) {
+  //       dispatch(fetchAllProducts());
+  //     }
+  //   });
+  // }
   console.log(data?.products)
   return (
     
@@ -66,13 +77,25 @@ export default function Home() {
       <section className="">
      
         <CardContent className="w-full">
-          <section>
-            <p>Product</p>
-            <p className="text-sm text-gray-400">
-            All Product
-            </p>
-          </section>
-<ProductList data={data && data?.products} />
+        <div className="mb-5 w-full flex justify-end">
+        <h2> <Link href="/admin/product/add" >Add New Product</Link>
+          
+        </h2>
+      </div>
+        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
+        {data && data.products.length > 0
+          ? data.products.map((productItem:any)=> (
+              <AdminProductTile 
+                // setFormData={setFormData}
+                // setOpenCreateProductsDialog={setOpenCreateProductsDialog}
+                // setCurrentEditedId={setCurrentEditedId}
+                product= {productItem }
+                // handleDelete={handleDelete}
+              />
+            ))
+          : null}
+      </div>
+{/* <ProductList data={data && data?.products} /> */}
 
         
         </CardContent>

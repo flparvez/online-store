@@ -30,12 +30,12 @@ export function ProductList(props: SalesProps) {
       <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="sm:w-[200px]">Category Name</TableHead>
+          <TableHead className=" ">Product Name</TableHead>
          
-          <TableHead>Product Name</TableHead>
-          <TableHead className="sm:w-[100px]">Edit</TableHead>
-          <TableHead className="sm:w-[100px]">Delete</TableHead>
-          <TableHead className="text-end">Amount</TableHead>
+          <TableHead className="">Category Name</TableHead>
+          <TableHead className=" ">Edit</TableHead>
+          <TableHead className="">Delete</TableHead>
+          <TableHead className="">Amount</TableHead>
         </TableRow>
       </TableHeader>
       {product?.map((item, i) => (
@@ -46,9 +46,9 @@ export function ProductList(props: SalesProps) {
     
       
           <TableRow >
+            <TableCell className="w-8">{item.name}</TableCell>
             <TableCell className="">{item.category}</TableCell>
-            <TableCell className="">{item.name}</TableCell>
-            <TableCell>Edit</TableCell>
+            <TableCell className="bg-green-300 rounded">Edit</TableCell>
             <TableCell className="w-4">Delete</TableCell>
             <TableCell className="text-end">{item.price}</TableCell>
           </TableRow>
