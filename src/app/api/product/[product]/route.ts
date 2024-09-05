@@ -201,11 +201,11 @@ export const DELETE =async (request:Request,context: { params:any}) => {
   
     const product = await Product.findOne({_id:productId,user:userId})
 
-    if (!product) {
-        return new NextResponse (
-            JSON.stringify({message:"Product not found"}),
-            {status:404}
-        ) }
+    // if (!product) {
+    //     return new NextResponse (
+    //         JSON.stringify({message:"Product not found"}),
+    //         {status:404}
+    //     ) }
 
         await Product.findByIdAndDelete(productId)
         return new NextResponse(JSON.stringify({message:"Product deleted successfully"}), {status:200});

@@ -7,10 +7,12 @@ import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
 
 
 import  { ProductList, SalesProps } from "@/components/SalesCard";
-import { useGetProductsQuery } from "@/store/services/prodcutApi";
+import {  useDeleteProductMutation, useGetProductsQuery } from "@/store/services/prodcutApi";
 import AdminProductTile from "@/components/ProductListAdmin";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
+import { useState } from "react";
+
 
 
 
@@ -42,21 +44,28 @@ const cardData: CardProps[] = [
 ];
 
 
-// const {data}:SalesProps[] = useGetProductsQuery()
-  
-  
+const initialFormData = {
+  image: null,
+  title: "",
+  description: "",
+  category: "",
+  brand: "",
+  price: "",
+  salePrice: "",
+  totalStock: "",
+  averageReview: 0,
+};
 
 
 export default function Home() {
+  const [formData, setFormData] = useState(initialFormData);
   const {data,isLoading} = useGetProductsQuery()
+  const [deleteProduct] = useDeleteProductMutation();
 
-  // function handleDelete(getCurrentProductId) {
-  //   dispatch(deleteProduct(getCurrentProductId)).then((data) => {
-  //     if (data?.payload?.success) {
-  //       dispatch(fetchAllProducts());
-  //     }
-  //   });
-  // }
+const handleDelete = async (productId: number) => {
+    await deleteProduct(productId);
+  };
+
   console.log(data?.products)
   return (
     
@@ -86,11 +95,11 @@ export default function Home() {
         {data && data.products.length > 0
           ? data.products.map((productItem:any)=> (
               <AdminProductTile 
-                // setFormData={setFormData}
+                setFormData={setFormData}
                 // setOpenCreateProductsDialog={setOpenCreateProductsDialog}
                 // setCurrentEditedId={setCurrentEditedId}
                 product= {productItem }
-                // handleDelete={handleDelete}
+                handleDelete={handleDelete}
               />
             ))
           : null}
@@ -100,7 +109,7 @@ export default function Home() {
         
         </CardContent>
 
-        {/*  */}
+
       </section>
     </div>
   );

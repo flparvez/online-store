@@ -1,20 +1,22 @@
+"use client"
+import Image from "next/image";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 function AdminProductTile({
   product,
-  // setFormData,
+  setFormData,
   // setOpenCreateProductsDialog,
   // setCurrentEditedId,
-  // handleDelete,
+  handleDelete,
 }:any) {
   return (
     <Card className="w-full max-w-sm mx-auto">
       <div>
         <div className="relative">
-          <img
-            src={product?.image}
-            alt={product?.title}
+        <img
+            src={product.images}
+            alt="text" 
             className="w-full h-[300px] object-cover rounded-t-lg"
           />
         </div>
@@ -38,13 +40,13 @@ function AdminProductTile({
             onClick={() => {
               // setOpenCreateProductsDialog(true);
               // setCurrentEditedId(product?._id);
-              // setFormData(product);
+              setFormData(product);
             }}
           >
             Edit
           </Button>
-          <Button >Delete</Button>
-          {/* <Button onClick={() => handleDelete(product?._id)}>Delete</Button> */}
+       
+          <Button onClick={() => handleDelete(product?._id)}>Delete</Button>
         </CardFooter>
       </div>
     </Card>

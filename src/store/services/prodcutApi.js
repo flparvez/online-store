@@ -23,14 +23,17 @@ export const prodcutsApi = createApi({
     getProductById: builder.query({
       query: (productId) => `product/${productId}`,
     }),
-
-    deleteProductById: builder.query({
-      query: (productId) => `product/${productId}`,
-      method: 'DELETE',
-    })
+    deleteProduct: builder.mutation({
+      query: (productId) => ({
+        url: `product/${productId}?userId=${id}`,
+        method: 'DELETE',
+      }),
+      // invalidatesTags: (result, error, id) => [{ type: 'productId', id }],
+    }),
+    
     
   }),
 })
 
 
-export const { useGetProductsQuery,useGetProductByIdQuery,useAddProductMutation } = prodcutsApi
+export const { useGetProductsQuery,useGetProductByIdQuery,useAddProductMutation,useDeleteProductMutation } = prodcutsApi

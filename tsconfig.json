@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/AddProductForm.tsx", "src/store/services/prodcutApi.js", "src/store/services/CategoryApi.js", "src/components/ui/badge.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/AddProductForm.tsx", "src/store/services/prodcutApi.js", "src/store/services/CategoryApi.js", "src/components/ui/badge.jsx", "src/components/SwiperSlide.jsx", "src/components/CategorySlide.jsx"],
   "exclude": ["node_modules"]
 }
