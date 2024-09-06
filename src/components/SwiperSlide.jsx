@@ -33,7 +33,7 @@ pagination={{clickable:true}}
         1024: { slidesPerView: 4 },
       }}
     >
-      {products.map((product) => (
+      {products?.map((product) => (
         <SwiperSlide key={product._id}>
            <div className="w-full max-w-sm mx-auto">
             <div className=" overflow-hidden">
