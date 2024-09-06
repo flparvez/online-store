@@ -6,7 +6,7 @@ import PageTitle from "@/components/PageTitle";
 import { DollarSign, Users, CreditCard, Activity } from "lucide-react";
 
 
-import  { ProductList, SalesProps } from "@/components/SalesCard";
+
 import {  useDeleteProductMutation, useGetProductsQuery } from "@/store/services/prodcutApi";
 import AdminProductTile from "@/components/ProductListAdmin";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,7 +16,7 @@ import { useState } from "react";
 
 
 
-const cardData: CardProps[] = [
+const cardData= [
   {
     label: "Total Porducts",
     amount: "23",
@@ -62,7 +62,7 @@ export default function Home() {
   const {data,isLoading} = useGetProductsQuery()
   const [deleteProduct] = useDeleteProductMutation();
 
-const handleDelete = async (productId: number) => {
+const handleDelete = async (productId) => {
     await deleteProduct(productId);
   };
 
@@ -93,7 +93,8 @@ const handleDelete = async (productId: number) => {
       </div>
         <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
         {data && data.products.length > 0
-          ? data.products.map((productItem:any)=> (
+          ? data.products.map((productItem)=> (
+              // eslint-disable-next-line react/jsx-key
               <AdminProductTile 
                 setFormData={setFormData}
                 // setOpenCreateProductsDialog={setOpenCreateProductsDialog}

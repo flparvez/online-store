@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import productSlice from './features/products/productSlice'
+
 import { prodcutsApi } from './services/prodcutApi'
 import { categoryApi } from './services/CategoryApi'
 import { UserApi } from './services/UserApi'

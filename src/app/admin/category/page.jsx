@@ -13,11 +13,7 @@ import {
 import { useGetCategoriesQuery } from "@/store/services/CategoryApi";
 import Link from "next/link";
 
-export type SalesProps = {
-  name: number,
-  desciption: string;
-  img: string;
-};
+
 
 
 export default function ProductList() {
@@ -32,8 +28,9 @@ if (!isLoading)
 <div>
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
           {categories && categories.length > 0
-            ? categories.map((productItem:any) => (
-                <ShoppingProductTile
+            ? categories.map((productItem) => (
+                // eslint-disable-next-line react/jsx-key
+                <ShoppingProductTile 
                   // handleGetProductDetails={handleGetProductDetails}
                   product= {productItem}
                   // handleAddtoCart={handleAddtoCart}
