@@ -5,8 +5,9 @@ import "./globals.css";
 
 import { Provider } from 'react-redux'
 import { store } from "@/store/store";
-import SideNavbar from "@/components/sideNavbar";
+// import SideNavbar from "@/components/sideNavbar";
 import { cn } from "@/lib/utils";
+import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -23,7 +24,6 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen w-full bg-white text-black flex ",
           inter.className,
           {
             "debug-screens": process.env.NODE_ENV === "development"
@@ -33,9 +33,11 @@ export default function RootLayout({
         {/* sidebar */}
         {/* <p className="border">Sidebar</p> */}
         <Provider store={store}>
-        <SideNavbar  />
+        {/* <SideNavbar  /> */}
         {/* main page */}
-        <div className="p-4 w-full">{children}</div>
+        <div className="p-4 w-full">
+          <Navbar />
+          {children}</div>
 
         </Provider>
       </body>

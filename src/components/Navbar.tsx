@@ -32,6 +32,12 @@ const Navbar = () => {
             </Link>
           </div>
 
+         <div className="flex-shrink-0">
+            <Link href="/admin">
+              <h2 className="text-muted font-bold text-gray-800">Admin</h2>
+            </Link>
+          </div>
+
          
 
           {/* Category Dropdown */}

@@ -12,6 +12,7 @@ import AdminProductTile from "@/components/ProductListAdmin";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { useState } from "react";
+import SideNavbar from "@/components/sideNavbar";
 
 
 
@@ -68,9 +69,10 @@ const handleDelete = async (productId) => {
 
   console.log(data?.products)
   return (
-    
+    <div className=""> 
+    <SideNavbar />
     <div className="flex flex-col gap-5  w-full">
-  
+
       <PageTitle title="Dashboard" />
       <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4">
         {cardData.map((d, i) => (
@@ -112,6 +114,7 @@ const handleDelete = async (productId) => {
 
 
       </section>
+    </div>
     </div>
   );
 }

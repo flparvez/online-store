@@ -2,7 +2,7 @@
 import CategorySlides from '@/components/CategorySlide'
 
 import { LampDemo } from '@/components/LampSection'
-import Navbar from '@/components/Navbar'
+
 import SwiperSlides from '@/components/SwiperSlide'
 
 
@@ -19,8 +19,9 @@ const Home = () => {
   return (
     <div>
       <div className='my-5'>
-   <Navbar/>
+
  
+ {/* Featured Products And Category With Link */}
    <div className="">
   {
   data && data.products.length > 0
@@ -38,9 +39,23 @@ const Home = () => {
               <LampDemo />
             </div>
               </div>
+              {/* Category Slider With Link */}
               <div className='mx-auto '>
             <h2>Product Category</h2>
-          <CategorySlides products={data?.products} />
+          <CategorySlides  />
+    </div>
+
+    {/* Product List Product Category Button */}
+    <div>
+      <div className='flex justify-center'>
+        <button className='py-3 px-6 text-white bg-blue-600 rounded-md'>View All Product</button>
+  
+    </div>
+    </div>
+
+    {/* Product List Responsive Design */}
+    <div>
+      <h2>All Products</h2>
     </div>
     </div>
   )

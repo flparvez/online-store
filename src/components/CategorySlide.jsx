@@ -1,5 +1,5 @@
 "use client"
-import  { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import  { Navigation, Pagination, } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, {  Autoplay } from 'swiper';
@@ -8,10 +8,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { useGetCategoriesQuery } from '@/store/services/CategoryApi';
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 const CategorySlides = ({products}) => {
-  console.log("product",products?.name)
+  const {data} = useGetCategoriesQuery()
+
   return (
     <div>
     <Swiper
@@ -33,7 +35,7 @@ const CategorySlides = ({products}) => {
            1024: { slidesPerView: 4 },
          }}
        >
-         {products?.map((product) => (
+         {data?.map((product) => (
            <SwiperSlide key={product._id}>
               <div className="w-full max-w-sm mx-auto">
                <div className=" overflow-hidden">
@@ -43,9 +45,9 @@ const CategorySlides = ({products}) => {
                className="w-full h-[300px] object-cover rounded-t-lg"
              />
                </div>
-               <h3 className="text-xl font-bold mb-2 mt-2 text-center">{product.name}</h3>
-               <p className="text-gray-500 mb-2 text-center">{product.category}</p>
-               <p className="text-lg font-bold text-center">${product.price}</p>
+               <h3 className="text-xl font-bold mb-2 mt-2 text-center">{product.title}</h3>
+               <p className="text-gray-500 mb-2 text-center">{product.description}</p>
+            
              </div>
    
            </SwiperSlide>
