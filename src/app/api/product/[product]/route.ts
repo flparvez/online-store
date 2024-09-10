@@ -22,12 +22,7 @@ try {
     )
     }
     
-    if (!categoryId || !Types.ObjectId.isValid(categoryId!)) {
-        return new NextResponse(
-            JSON.stringify({message:"Inavlid or missing CategoryId"}),
-            {status:400}
-        )
-    }
+
     if (!productId || !Types.ObjectId.isValid(productId!)) {
         return new NextResponse(
             JSON.stringify({message:"Inavlid or missing ProductId"}),
@@ -44,19 +39,12 @@ try {
             {status:404}
         )
     }
-    const category = await Category.findOne({_id:categoryId,user:userId});
-    
-    if (!category) {
-        return new NextResponse (
-            JSON.stringify({message:"Category not found or does not exist"}),
-            {status:404}
-        )
-    }
+
   
   const product = await Product.findOne({
     _id:productId,
     user: userId,
-    category: categoryId
+
   })
 
   if (!product) {
@@ -85,14 +73,17 @@ export const PATCH =async (request:Request,context: { params:any})  =>{
         const {
             name,
             description,
+            category,
             price,
             images,
             stock,
-            sold
+            sold,
+            video,
+            tags,
         } = body;
         const { searchParams } = new URL(request.url);
         const userId = searchParams.get("userId");
-        const categoryId = searchParams.get("categoryId");
+        
 
 
         
@@ -104,12 +95,7 @@ export const PATCH =async (request:Request,context: { params:any})  =>{
     )
     }
     
-    if (!categoryId || !Types.ObjectId.isValid(categoryId!)) {
-        return new NextResponse(
-            JSON.stringify({message:"Inavlid or missing CategoryId"}),
-            {status:400}
-        )
-    }
+
     if (!productId || !Types.ObjectId.isValid(productId!)) {
         return new NextResponse(
             JSON.stringify({message:"Inavlid or missing productId"}),
@@ -140,10 +126,13 @@ const updatedProduct = await Product.findByIdAndUpdate(
     {
         name,
         description,
+        category,
         price,
         images,
         stock,
         sold,
+        video,
+        tags,
     },
     { new: true }
   

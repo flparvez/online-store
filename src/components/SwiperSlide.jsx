@@ -11,7 +11,7 @@ import 'swiper/css/scrollbar';
 import Image from 'next/image';
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 const SwiperSlides = ({products}) => {
-  console.log("product",products?.name)
+
   return (
    <div>
  <Swiper

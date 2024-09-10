@@ -15,7 +15,7 @@ import React from 'react'
 const Home = () => {
  
   const {data} = useGetProductsQuery()
- 
+//  console.log(data)
   return (
     <div>
       <div className='my-5'>
