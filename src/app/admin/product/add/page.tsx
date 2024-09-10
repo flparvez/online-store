@@ -9,9 +9,10 @@ import { cn } from "@/lib/utils";
 
 import { useAddProductMutation } from "@/store/services/prodcutApi";
 import { useRouter } from "next/navigation";
-import ReactQuill from 'react-quill';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import React from "react";
+import dynamic from "next/dynamic";
 
 
 
