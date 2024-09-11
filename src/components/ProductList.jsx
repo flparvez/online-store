@@ -25,7 +25,7 @@ const ProductList = ({product}) => {
 }
   return (
    
-    <div className="container mx-auto">
+    <div className=" w-full">
 
        
 
@@ -38,7 +38,7 @@ const ProductList = ({product}) => {
                 <img
                 src={product.images}
                 alt="text" 
-                className="w-full h-[250px] object-cover rounded-t-lg"
+                className="w-full sm:h-[250px] h-[180px] object-cover rounded-t-lg"
               />
               </div>
         </CardDescription>
@@ -48,13 +48,11 @@ const ProductList = ({product}) => {
       
                 <p className="text-gray-500 mb-2 text-center">{product.category}</p>
                 <p className="text-lg font-bold text-center">${product.price}</p>
-              
+         
       </CardContent>
-      <CardFooter className="columns-2">
-       <Button className="justify-start">Add To Cart</Button>
-     
-       <Button className="justify-end">Buy Now</Button>
-      </CardFooter>
+      {/* <CardFooter className="">
+       
+      </CardFooter> */}
   
     </Card>
     

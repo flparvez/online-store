@@ -58,7 +58,7 @@ const Home = () => {
     
       
 
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-1 mt-4 sm:gap-3 sm:mt-8">
       {data?.products.map((product) => (
         <ProductList key={product.id} product={product} />
       
