@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Image from 'next/image';
+import Link from 'next/link';
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 const SwiperSlides = ({products}) => {
 
@@ -36,6 +37,7 @@ pagination={{clickable:true}}
       {products?.map((product) => (
         <SwiperSlide key={product._id}>
            <div className="w-full max-w-sm mx-auto">
+            <Link href={`/product/${product.slug}`}>
             <div className=" overflow-hidden">
             <img
             src={product.images}
@@ -46,6 +48,7 @@ pagination={{clickable:true}}
             <h3 className="text-xl font-bold mb-2 mt-2 text-center">{product.name}</h3>
             <p className="text-gray-500 mb-2 text-center">{product.category}</p>
             <p className="text-lg font-bold text-center">${product.price}</p>
+            </Link>
           </div>
 
         </SwiperSlide>

@@ -16,7 +16,7 @@ import Link from "next/link";
 
 
 
-export default function ProductList() {
+export default function CategorytList() {
 const {data,isLoading} = useGetCategoriesQuery()
 
   const categories =data;

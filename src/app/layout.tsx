@@ -24,14 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          inter.className,
-          {
-            "debug-screens": process.env.NODE_ENV === "development"
-          }
+          inter.className
         )}
       >
-        {/* sidebar */}
-        {/* <p className="border">Sidebar</p> */}
+     
         <Provider store={store}>
         {/* <SideNavbar  /> */}
         {/* main page */}

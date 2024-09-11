@@ -100,7 +100,7 @@ const handleDelete = async (productId) => {
               <AdminProductTile 
                 setFormData={setFormData}
                 // setOpenCreateProductsDialog={setOpenCreateProductsDialog}
-                // setCurrentEditedId={setCurrentEditedId}
+               
                 product= {productItem }
                 handleDelete={handleDelete}
               />

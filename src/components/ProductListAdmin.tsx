@@ -2,12 +2,13 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import Link from "next/link";
 
 function AdminProductTile({
   product,
-  setFormData,
+  
   // setOpenCreateProductsDialog,
-  // setCurrentEditedId,
+
   handleDelete,
 }:any) {
   return (
@@ -36,15 +37,8 @@ function AdminProductTile({
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-center">
-          <Button
-            onClick={() => {
-              // setOpenCreateProductsDialog(true);
-              // setCurrentEditedId(product?._id);
-              setFormData(product);
-            }}
-          >
-            Edit
-          </Button>
+          <Link href={`/admin/product/edit/${product?.slug}`}>Edit</Link>
+         
        
           <Button onClick={() => handleDelete(product?._id)}>Delete</Button>
         </CardFooter>

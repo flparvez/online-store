@@ -9,8 +9,9 @@ import SwiperSlides from '@/components/SwiperSlide'
 
 import { useGetProductsQuery } from '@/store/services/prodcutApi'
 
-
+import ProductList from '@/components/ProductList'
 import React from 'react'
+
 
 const Home = () => {
  
@@ -54,9 +55,17 @@ const Home = () => {
     </div>
 
     {/* Product List Responsive Design */}
-    <div>
-      <h2>All Products</h2>
+    
+      
+
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
+      {data?.products.map((product) => (
+        <ProductList key={product.id} product={product} />
+      
+ ))}
     </div>
+      
+    
     </div>
   )
 }

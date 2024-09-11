@@ -7,8 +7,9 @@ export const prodcutsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
   endpoints: (builder) => ({
+
+
     addProduct: builder.mutation({
-    
       query: (body) =>       ({
 
          url: `product?userId=${id}`,
@@ -17,11 +18,20 @@ export const prodcutsApi = createApi({
       }),
       invalidatesTags: [{ type: 'product', id: 'LIST' }],
     }),
+    editProduct: builder.mutation({
+      query: ({ id, updatedProduct }) => ({
+        url: `products/${id}`,
+        method: 'PUT',
+        body: updatedProduct,
+      }),
+    
+    }),
+
     getProducts: builder.query({
         query: () => 'product/',
     }),
-    getProductById: builder.query({
-      query: (productId) => `product/${productId}`,
+    getProductBySlug: builder.query({
+      query: (productSlug) => `product/${productSlug}`,
     }),
     deleteProduct: builder.mutation({
       query: (productId) => ({
@@ -36,4 +46,4 @@ export const prodcutsApi = createApi({
 })
 
 
-export const { useGetProductsQuery,useGetProductByIdQuery,useAddProductMutation,useDeleteProductMutation } = prodcutsApi
+export const { useGetProductsQuery,useGetProductBySlugQuery,useAddProductMutation,useDeleteProductMutation,useEditProductMutation } = prodcutsApi
