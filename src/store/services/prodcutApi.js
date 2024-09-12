@@ -18,10 +18,11 @@ export const prodcutsApi = createApi({
       }),
       invalidatesTags: [{ type: 'product', id: 'LIST' }],
     }),
+    
     editProduct: builder.mutation({
-      query: ({ id, updatedProduct }) => ({
-        url: `products/${id}`,
-        method: 'PUT',
+      query: ({ productSlug, updatedProduct }) => ({
+        url: `product/${productSlug}?userId=${id}`,
+        method: 'PATCH',
         body: updatedProduct,
       }),
     
@@ -34,8 +35,8 @@ export const prodcutsApi = createApi({
       query: (productSlug) => `product/${productSlug}`,
     }),
     deleteProduct: builder.mutation({
-      query: (productId) => ({
-        url: `product/${productId}?userId=${id}`,
+      query: (productSlug) => ({
+        url: `product/${productSlug}?userId=${id}`,
         method: 'DELETE',
       }),
       // invalidatesTags: (result, error, id) => [{ type: 'productId', id }],

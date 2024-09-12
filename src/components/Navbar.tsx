@@ -28,7 +28,7 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/">
-              <h2 className="text-xl font-bold text-gray-800">MyStore</h2>
+              <h2 className="text-xl font-bold text-gray-800">Unique Store</h2>
             </Link>
           </div>
 

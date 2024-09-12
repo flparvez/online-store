@@ -63,11 +63,11 @@ export default function Home() {
   const {data,isLoading} = useGetProductsQuery()
   const [deleteProduct] = useDeleteProductMutation();
 
-const handleDelete = async (productId) => {
-    await deleteProduct(productId);
+const handleDelete = async (productSlug) => {
+    await deleteProduct(productSlug);
   };
 
-  console.log(data?.products)
+  // console.log(data?.products)
   return (
     <div className=""> 
     <SideNavbar />

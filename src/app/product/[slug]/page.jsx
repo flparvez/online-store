@@ -17,9 +17,76 @@ const ProductPage =({ params }) => {
   if (!product) return <div>Loading...</div>
  
   return (
-    <div>
-      <h2>{product?.name}</h2>
+    <div className="container mx-auto p-4">
+ 
+    {/* Product Info Section */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+           {/* Product Image */}
+           <div className="relative">
+        <img
+          src={product.images}
+          alt="Product Image"
+          className="w-full h-full object-cover rounded-md"
+        />
+      </div>
+    
+
+      {/* Product Details */}
+      <div className="flex flex-col justify-between">
+        <div>
+          {/* Product Title */}
+          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+
+          {/* Product Price */}
+          <p className="text-2xl text-green-600 font-semibold mb-4">${product.price}</p>
+
+          {/* Product Stock */}
+          <p className="text-md text-gray-700 mb-4">Stock:{product.stock}</p>
+
+          {/* Product Category */}
+          <p className="text-md text-gray-500 mb-6">Category: <span className="font-semibold">{product.category}</span></p>
+
+          {/* Product Tags */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            <span className="px-3 py-1 bg-blue-200 text-blue-800 rounded-md">Tag 1</span>
+            <span className="px-3 py-1 bg-green-200 text-green-800 rounded-md">Tag 2</span>
+            <span className="px-3 py-1 bg-red-200 text-red-800 rounded-md">Tag 3</span>
+          </div>
+     {/* Product Video (YouTube Embed) */}
+     <div className="mb-6">
+            <h2 className="text-lg font-semibold mb-2">Product Video</h2>
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe
+                className="w-full lg:h-80 md:h-96 h-56 rounded-md"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Product Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+
+          {/* Product Description */}
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold mb-2">Product Description</h2>
+            <div
+      className="prose"
+      dangerouslySetInnerHTML={{ __html: product.description }}
+    />
+          </div>
+
+     
+        </div>
+
+        {/* Sticky Add to Cart Button */}
+        <div className="sticky bottom-0 bg-white p-4 border-t border-gray-200">
+          <button className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+            Add to Cart
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
   )
 }
 
