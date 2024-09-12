@@ -143,62 +143,62 @@ export const GET = async (request:Request,context: { params:any}) =>{
           );
         }
       };
-// edit single product
+
 
 
 //  DELETE PRODUCT
 
-export const DELETE =async (request:Request,context: { params:any}) => {
-    const productSlug = context.params.slug;
+export const DELETE = async (request: Request, context: { params: any }) => {
+  const productSlug = context.params.slug;
 
-    try {
-   
-    const { searchParams } = new URL(request.url);
-        const userId = searchParams.get("userId");
- 
+  try {
+      const { searchParams } = new URL(request.url);
+      const userId = searchParams.get("userId");
 
+      // Check userId and slug
+      if (!userId || !Types.ObjectId.isValid(userId)) {
+          return new NextResponse(
+              JSON.stringify({ message: "Invalid or missing userId" }),
+              { status: 400 }
+          );
+      }
 
-        
-  // check userId and categoryId
-  if (!userId || !Types.ObjectId.isValid(userId!)) {
-    return new NextResponse(
-        JSON.stringify({message:"Inavlid or missing userId"}),
-        {status:400}
-    )
-    }
-    
- 
-    if (!productSlug || !Types.ObjectId.isValid(productSlug!)) {
-        return new NextResponse(
-            JSON.stringify({message:"Inavlid or missing productId"}),
-            {status:400}
-        )
-    }
+      if (!productSlug) {
+          return new NextResponse(
+              JSON.stringify({ message: "Invalid or missing slug" }),
+              { status: 400 }
+          );
+      }
 
-    await connectDb();
+      await connectDb();
 
-    const user = await User.findOneAndDelete(productSlug);
+      const user = await User.findById(userId);
 
-    if (!user) {
-        return new NextResponse (
-            JSON.stringify({message:"User not found"}),
-            {status:404}
-        )
-    }
-  
-    const product = await Product.findOne({slug:productSlug,user:userId})
+      if (!user) {
+          return new NextResponse(
+              JSON.stringify({ message: "User not found" }),
+              { status: 404 }
+          );
+      }
 
-    // if (!product) {
-    //     return new NextResponse (
-    //         JSON.stringify({message:"Product not found"}),
-    //         {status:404}
-    //     ) }
+      const result = await Product.findOneAndDelete({ slug: productSlug });
 
-        await Product.findOneAndDelete(productSlug)
-        return new NextResponse(JSON.stringify({message:"Product deleted successfully"}), {status:200});
+      if (!result) {
+          return new NextResponse(
+              JSON.stringify({ message: "Product not found or already deleted" }),
+              { status: 404 }
+          );
+      }
 
- 
-} catch (error:any) {
-    return new NextResponse("Product Delete Failed",{status:400})
-}
-} 
+      return new NextResponse(
+          JSON.stringify({ message: "Product deleted successfully" }),
+          { status: 200 }
+      );
+
+  } catch (error: any) {
+      return new NextResponse(
+          JSON.stringify({ message: "Product delete failed", error: error.message }),
+          { status: 400 }
+      );
+  }
+};

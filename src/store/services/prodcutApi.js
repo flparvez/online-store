@@ -2,7 +2,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 
-const id ="66e2c3a77c0562e6c3c2274e"
+const id ="66e2cc437c0562e6c3c227af"
 export const prodcutsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),

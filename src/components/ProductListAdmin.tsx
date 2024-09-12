@@ -40,7 +40,7 @@ function AdminProductTile({
           <Link href={`/admin/product/edit/${product?.slug}`}>Edit</Link>
          
        
-          <Button onClick={() => handleDelete(product?._id)}>Delete</Button>
+          <Button onClick={() => handleDelete(product?.slug)}>Delete</Button>
         </CardFooter>
       </div>
     </Card>
