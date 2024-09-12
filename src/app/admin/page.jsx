@@ -13,6 +13,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { useState } from "react";
 import SideNavbar from "@/components/sideNavbar";
+import { NextRequest } from "next/server";
 
 
 
@@ -58,7 +59,7 @@ const initialFormData = {
 };
 
 
-export default function Home() {
+export default function Home(request) {
   const [formData, setFormData] = useState(initialFormData);
   const {data,isLoading} = useGetProductsQuery()
   const [deleteProduct] = useDeleteProductMutation();

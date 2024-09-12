@@ -26,7 +26,7 @@ const ProductPage =({ params }) => {
         <img
           src={product.images}
           alt="Product Image"
-          className="w-full h-full object-cover rounded-md"
+          className="w-full min-h-min md:h-[70%] sm:h-full h-80 object-cover rounded-md"
         />
       </div>
     
@@ -35,20 +35,20 @@ const ProductPage =({ params }) => {
       <div className="flex flex-col justify-between">
         <div>
           {/* Product Title */}
-          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+          <h1 className="sm:text-3xl text-2xl font-bold mb-4">{product.name}</h1>
 
           {/* Product Price */}
-          <p className="text-2xl text-green-600 font-semibold mb-4">${product.price}</p>
+          <p className="text-xl sm:text-2xl text-green-600 font-semibold mb-4">${product.price}</p>
 
           {/* Product Stock */}
           <p className="text-md text-gray-700 mb-4">Stock:{product.stock}</p>
 
           {/* Product Category */}
-          <p className="text-md text-gray-500 mb-6">Category: <span className="font-semibold">{product.category}</span></p>
+          <p className="text-md text-gray-500 mb-6">Category: <span className="font-bold">{product.category}</span></p>
 
           {/* Product Tags */}
           <div className="flex flex-wrap gap-2 mb-6">
-            <span className="px-3 py-1 bg-blue-200 text-blue-800 rounded-md">Tag 1</span>
+            <span className="px-3 py-1 bg-blue-200 text-blue-800 rounded-md">{product.tags}</span>
             <span className="px-3 py-1 bg-green-200 text-green-800 rounded-md">Tag 2</span>
             <span className="px-3 py-1 bg-red-200 text-red-800 rounded-md">Tag 3</span>
           </div>
@@ -79,8 +79,8 @@ const ProductPage =({ params }) => {
         </div>
 
         {/* Sticky Add to Cart Button */}
-        <div className="sticky bottom-0 bg-white p-4 border-t border-gray-200">
-          <button className="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+        <div className="sticky bottom-0 bg-white p-2 border-t border-gray-400">
+          <button className="w-full  py-2 sm:py-4 bg-orange-600 text-white rounded-md hover:bg-blue-700">
             Add to Cart
           </button>
         </div>

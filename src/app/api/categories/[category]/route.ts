@@ -11,9 +11,9 @@ export const PATCH  = async (request:  Request,context: {params:any })=>{
 
 
     try {
-        console.log(categoryId)
+        
 const body= await request.json();
-const {title,description} = body;
+const {title,description,image} = body;
 
 const { searchParams } = new URL(request.url);
 const userId = searchParams.get("userId");
@@ -53,7 +53,7 @@ if (!category) {
 
 const updatedCategory = await Category.findByIdAndUpdate(
 categoryId,
-{title,description},
+{title,description,image},
 {new:true}
 );
 

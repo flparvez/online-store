@@ -37,18 +37,18 @@ const CategorySlides = ({products}) => {
        >
          {data?.map((product) => (
            <SwiperSlide key={product._id}>
-              <div className="w-full max-w-sm mx-auto">
+             
                <div className=" overflow-hidden">
                <img
-               src={product.images}
+               src={product.image}
                alt="text" 
-               className="w-full h-[300px] object-cover rounded-t-lg"
+               className="max-w-md h-[150px] object-cover rounded-t-lg"
              />
                </div>
                <h3 className="text-xl font-bold mb-2 mt-2 text-center">{product.title}</h3>
                <p className="text-gray-500 mb-2 text-center">{product.description}</p>
             
-             </div>
+          
    
            </SwiperSlide>
          ))}

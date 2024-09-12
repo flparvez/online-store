@@ -23,7 +23,7 @@ export const POST = async (request:Request) =>{
         // get user
         const { searchParams } = new URL(request.url);
         const userId = searchParams.get("userId");
-        const {title,description } = await request.json();
+        const {title,description,image } = await request.json();
 
         if (!userId || !Types.ObjectId.isValid(userId)) {
             return new NextResponse(JSON.stringify({message:"Invalid or missing userId"}),{status:400})
@@ -39,6 +39,7 @@ export const POST = async (request:Request) =>{
         const newCategory = new Category({
             title,
             description,
+            image,
             user: new Types.ObjectId(userId)
         
         });

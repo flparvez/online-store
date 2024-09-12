@@ -69,8 +69,25 @@ const EditPage = ({ params }) => {
   const tagOptions = ["Smart Watch", "UPS", "Headphone"];
 
   return (
+
+
+
+
+
     <div className="max-w-md sm:max-w-[90%] w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-      <h2>Edit Product</h2>
+          <div className="sm:flex sm:items-center sm:justify-center">
+      <div className="text-center sm:text-left">
+        <p className="my-4 text-xl text-red-500">
+          Editing <span className="text-green-600">{product?.name}</span>
+        </p>
+      </div>
+
+    <hr class="my-8 h-px border-0 bg-gray-300" />
+
+
+    
+    </div>
+      
       <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="name">Product Name</Label>
@@ -90,7 +107,8 @@ const EditPage = ({ params }) => {
             className="mt-1 block w-full h-56 border-gray-300 rounded-md shadow-sm"
           />
         </LabelInputContainer>
-
+<br />
+<br />
         <LabelInputContainer className="mb-4">
           <Label htmlFor="category">Category</Label>
           <select
@@ -159,8 +177,8 @@ const EditPage = ({ params }) => {
           <Label>Product Tags</Label>
           {tagOptions.map((cat) => (
             <div className="flex items-center space-x-2" key={cat}>
-              <RadioGroupItem
-                {...register("tags", { required: true })}
+              <RadioGroupItem 
+                {...register("tags", )}
                 value={cat.toLocaleLowerCase()}
                 id={cat.toLocaleLowerCase()}
               />
@@ -170,7 +188,7 @@ const EditPage = ({ params }) => {
             </div>
           ))}
         </RadioGroup>
-
+<br />
         <button
           className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow"
           type="submit"

@@ -1,38 +1,43 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
-import axios from "axios";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useLoginUserMutation } from "@/store/services/UserApi";
+import { useRouter } from "next/navigation";
 
 
 
 function Login() {
+  
   const [loginUser] = useLoginUserMutation();
-  const router = useRouter();
+  const router = useRouter()
 
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const onLogin = async () => {
+
     try {
-      setLoading(true);
-      const response = await loginUser(user).unwrap();
+      
+      const response = await loginUser(user);
       console.log(response);
-      toast.success("Login Successfully");
+
+      if (response) {
+        setLoading(false);
+        router.push('/')
+      }
       // router.push("/profile");
-      router.push("/");
+     
     } catch (error: any) {
       console.log("Login failed", error);
-      toast.error(error.message);
+     
     }
   };
 
@@ -42,7 +47,7 @@ function Login() {
         Login Account
       </h2>
       <p className=" text-sm max-w-sm mt-2 text-center text-neutral-300">
-        {loading ? "processing" : "Login Success"}
+        {loading ? "Not Login" : "Login Success"}
       </p>
       <div className="text-white bg-black flex flex-col items-center justify-center  min-h-screen py-2">
         <LabelInputContainer className="mb-4">
