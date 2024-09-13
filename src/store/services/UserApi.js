@@ -1,11 +1,6 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-// export type Category = {
-//   id: number;
-//   title: string;
-//   description: string;
-//   image: number;
-// };
+
 const id ="66e2c3a77c0562e6c3c2274e"
 export const UserApi = createApi({
     

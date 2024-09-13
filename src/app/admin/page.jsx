@@ -13,54 +13,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { useState } from "react";
 import SideNavbar from "@/components/sideNavbar";
-import { NextRequest } from "next/server";
+import { useGetSingleUserQuery } from "@/store/services/UserApi";
 
 
 
-
-const cardData= [
-  {
-    label: "Total Porducts",
-    amount: "23",
-    discription: "Brand New Porduct",
-    icon: DollarSign
-  },
-  {
-    label: "Total User",
-    amount: "12",
-    discription: "+verified user",
-    icon: Users
-  },
-  {
-    label: "Category",
-    amount: "7",
-    discription: "all categories",
-    icon: CreditCard
-  },
-  {
-    label: "Active Now",
-    amount: "+573",
-    discription: "+201 since last hour",
-    icon: Activity
-  }
-];
+export default function Home() {
 
 
-const initialFormData = {
-  image: null,
-  title: "",
-  description: "",
-  category: "",
-  brand: "",
-  price: "",
-  salePrice: "",
-  totalStock: "",
-  averageReview: 0,
-};
 
-
-export default function Home(request) {
-  const [formData, setFormData] = useState(initialFormData);
   const {data,isLoading} = useGetProductsQuery()
   const [deleteProduct] = useDeleteProductMutation();
 
@@ -74,18 +34,7 @@ const handleDelete = async (productSlug) => {
     <SideNavbar />
     <div className="flex flex-col gap-5  w-full">
 
-      <PageTitle title="Dashboard" />
-      <section className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4">
-        {cardData.map((d, i) => (
-          <Card
-            key={i}
-            amount={d.amount}
-            discription={d.discription}
-            icon={d.icon}
-            label={d.label}
-          />
-        ))}
-      </section>
+
       <section className="">
      
         <CardContent className="w-full">
@@ -99,7 +48,7 @@ const handleDelete = async (productSlug) => {
           ? data.products.map((productItem)=> (
               // eslint-disable-next-line react/jsx-key
               <AdminProductTile 
-                setFormData={setFormData}
+             
                 // setOpenCreateProductsDialog={setOpenCreateProductsDialog}
                
                 product= {productItem }
