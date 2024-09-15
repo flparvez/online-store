@@ -10,12 +10,7 @@ const ShoppingCart = () => {
   const dispatch = useDispatch();
 
 
-  // const [cartItems, setCartItems] = useState([
-  //   { id: 1, name: 'Premium T-Shirt', price: 29.99, quantity: 1, size: 'M', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab', rating: 4 },
-  //   { id: 2, name: 'Designer Jeans', price: 79.99, quantity: 1, size: '32', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d', rating: 5 },
-  //   { id: 3, name: 'Leather Jacket', price: 199.99, quantity: 1, size: 'L', image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5', rating: 3 },
-  // ]);
-
+console.log(cartItems)
   const [cardDetails, setCardDetails] = useState({
     number: '',
     name: '',
@@ -26,37 +21,15 @@ const ShoppingCart = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
-  useEffect(() => {
-    // Add drag-and-drop functionality here
-  }, []);
 
-  const updateQuantity = (id, change) => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, quantity: Math.max(0, item.quantity + change) } : item
-      )
-    );
-  };
 
-  const removeItem = (id) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
-  };
 
-  const updateSize = (id, newSize) => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, size: newSize } : item
-      )
-    );
-  };
 
-  const updateRating = (id, newRating) => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, rating: newRating } : item
-      )
-    );
-  };
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "...";
+    }
+  }
 
   const handleCardInput = (e) => {
     const { name, value } = e.target;
@@ -83,14 +56,15 @@ const ShoppingCart = () => {
       {cartItems.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (
+        
         <div>
-          {cartItems.map(item => (
+        { cartItems.map(item => (
             <div key={item.id} className="flex justify-between p-4">
-              <img src={item.image} alt={item.name} className="w-20" />
+              <img src={item.img} alt={item.name} className="w-20" />
               <div>
-                <p>{item.name}</p>
+                <p>{truncateText(item.name,20)}</p>
                 <p>Quantity: {item.quantity}</p>
-                <p>Total: ${item.totalPrice}</p>
+                <p>Total: ${item.price * item.quantity}</p>
                 <button
                   onClick={() => dispatch(removeFromCart({ id: item.id }))}
                   className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
@@ -98,16 +72,21 @@ const ShoppingCart = () => {
                   Remove
                 </button>
               </div>
-            </div>
-          ))}
-          <p className="font-bold text-xl">Total: ${totalAmount}</p>
+          
+          
+          <p className="font-bold text-xl">Total: ${item.price}</p>
+     
           <button
             onClick={() => dispatch(clearCart())}
-            className="mt-4 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+            className="mt-4 dark:bg-white  dark:text-black bg-white text-black h-20 hover:bg-yellow-500 font-bold py-2 px-2 rounded"
           >
             Clear Cart
           </button>
+
+          </div>
+             ))}
         </div>
+        
       )}
     </div>
 
@@ -120,11 +99,11 @@ const ShoppingCart = () => {
             </div>
             <div className="flex justify-between mb-2">
               <span>Shipping</span>
-              <span>$5.00</span>
+              <span>$0.00</span>
             </div>
             <div className="flex justify-between font-semibold">
               <span>Total</span>
-              <span>${(parseFloat(calculateTotal()) + 5).toFixed(2)}</span>
+              <span>${(parseFloat(calculateTotal()) + 0).toFixed(2)}</span>
             </div>
           </div>
 

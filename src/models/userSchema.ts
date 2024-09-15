@@ -7,13 +7,7 @@ const userSchema = new Schema(
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, enum: ['admin', 'manager', 'customer'], default: 'customer' },
-  // address: {
-  //   street: { type: String },
-  //   city: { type: String },
-  //   state: { type: String },
-  //   zip: { type: String },
-  //   country: { type: String }
-  // },
+
   orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
 
 },

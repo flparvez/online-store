@@ -18,8 +18,11 @@ const ProductPage =({params}) => {
 
   const handleAddToCart = () => {
     dispatch(addToCart({
-      id: product.id,
-      product:product
+      id: product._id,
+      price: product.price,
+      quantity: product.quantity,
+      name: product.name,
+      img: product.images,
     }));
   };
   if (!product) return <div>Loading...</div>
