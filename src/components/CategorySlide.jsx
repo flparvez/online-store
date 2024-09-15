@@ -1,8 +1,8 @@
 "use client"
-import  { Navigation, Pagination, } from 'swiper/modules';
+import  { Autoplay, Navigation, Pagination, } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, {  Autoplay } from 'swiper';
+
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { useGetCategoriesQuery } from '@/store/services/CategoryApi';
 
-SwiperCore.use([Navigation, Pagination, Autoplay]);
+
 const CategorySlides = ({products}) => {
   const {data} = useGetCategoriesQuery()
 

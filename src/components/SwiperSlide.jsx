@@ -1,8 +1,8 @@
 "use client"
-import  { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import  { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, {  Autoplay } from 'swiper';
+
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Image from 'next/image';
 import Link from 'next/link';
-SwiperCore.use([Navigation, Pagination, Autoplay]);
+
 const SwiperSlides = ({products}) => {
 
   return (
