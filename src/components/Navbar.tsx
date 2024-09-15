@@ -4,7 +4,7 @@ import { AiOutlineClose,AiOutlineMenu } from "react-icons/ai";
 import { FaShoppingCart } from 'react-icons/fa';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
+import Marquee from "react-fast-marquee";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -89,7 +89,7 @@ const Navbar = () => {
       </div>
       </div>
   
-
+<div className='font-bold'> <Marquee >আসসালামু আলাইকুম সম্মানিত সদস্য আপনাকে অভিনন্দন ওয়েবসাইটের প্রবেশ করার জন্য। আমাদের কাছে পেয়ে যাবেন টেকসই নিত্য প্রয়োজনীয় ইলেকট্রনিক মালামাল। আপনার পছন্দের প্রোডাক্ট  এড কার্ড করে এখনই অর্ডার করুন।</Marquee> </div>
       {/* Mobile Menu */}
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">

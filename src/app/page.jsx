@@ -55,16 +55,22 @@ const Home = () => {
     </div>
 
     {/* Product List Responsive Design */}
-    
-      
-
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-1 mt-4 sm:gap-3 sm:mt-8">
-      {data?.products.map((product) => (
+    <section className="py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            Feature Products
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {data?.products.map((product) => (
         <ProductList key={product.id} product={product} />
       
  ))}
-    </div>
+          </div>
+        </div>
+      </section>
       
+
+    
     
     </div>
   )

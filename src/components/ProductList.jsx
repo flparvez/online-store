@@ -13,6 +13,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils"; // Assuming you have this utility for conditional classes
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Badge } from "lucide-react";
 
 
 
@@ -25,41 +26,79 @@ const ProductList = ({product}) => {
 }
   return (
    
-    <div className=" w-full">
-
-       
-
-               
-            <Card>
-            <Link href={`/product/${product.slug}`}>
-      <CardHeader>
-        <CardTitle><h3 className="sm:text-xl text-sm sm:font-bold mb-2 mt-2 text-center ">{truncateText(product.name,24)}</h3></CardTitle>
-        <CardDescription><div className=" overflow-hidden">
-                <img
-                src={product.images}
-                alt="text" 
-                className="w-full sm:h-[250px] h-[180px] object-cover rounded-t-lg"
-              />
-              </div>
-        </CardDescription>
-      </CardHeader>
-      </Link>
-      <CardContent>
-      
-                <p className="text-gray-500 mb-2 text-center">{product.category}</p>
-                <p className="text-lg font-bold text-center">${product.price}</p>
-         
-      </CardContent>
-      {/* <CardFooter className="">
-       
-      </CardFooter> */}
-  
-    </Card>
-    
-
-       
-         
+    // <div className=" w-full">
+   <Card className="w-full max-w-sm mx-auto">
+      <div >
+        <Link href={`/product/${product.slug}`} >
+        <div className="relative">
+          <img
+            src={product?.images}
+            alt={product?.name}
+            className="w-full h-[300px] object-cover rounded-t-lg"
+          />
+          {product?.totalStock === 0 ? (
+            <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
+              Out Of Stock
+            </Badge>
+          ) : product?.totalStock < 10 ? (
+            <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
+              {`Only ${product?.stock} items left`}
+            </Badge>
+          ) : product?.salePrice > 0 ? (
+            <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
+              Sale
+            </Badge>
+          ) : null}
+        </div>
+        <CardContent className="p-4">
+          <h2 className="text-xl font-bold mb-2">{truncateText(product?.name,34)}</h2>
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-[16px] text-muted-foreground">
+              {product?.category}
+            </span>
+            <span className="text-[16px] text-muted-foreground">
+              {product.tags}
+            </span>
+          </div>
+          <div className="flex justify-between items-center mb-2">
+            <span
+              className={`${
+                product?.price > 0 ? "line-through" : ""
+              } text-lg font-semibold text-primary`}
+            >
+              ${product?.price + 220}
+            </span>
+            {product?.price > 0 ? (
+              <span className="text-lg font-semibold text-primary">
+                ${product?.price}
+              </span>
+            ) : null}
+          </div>
+          
+        </CardContent>
+        </Link>
       </div>
+      
+      <CardFooter>
+        {product?.stock === 0 ? (
+          <Button className="w-full opacity-60 cursor-not-allowed">
+            Out Of Stock
+          </Button>
+        ) : (
+          <Button
+            // onClick={() => handleAddtoCart(product?._id, product?.totalStock)}
+            className="w-full"
+          >
+            Add to cart
+          </Button>
+        )}
+      </CardFooter>
+    </Card>
+       
+
+
+       
+   
   );
 };
 
