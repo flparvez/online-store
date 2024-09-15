@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/store/cartSlice';
 const ProductPage =({params}) => {
   const [product, setProduct] = useState(null)
  
@@ -13,7 +14,14 @@ const ProductPage =({params}) => {
     fetchPosts()
   }, [params.slug])
   // console.log(product)
- 
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({
+      id: product.id,
+      product:product
+    }));
+  };
   if (!product) return <div>Loading...</div>
  
   return (
@@ -82,7 +90,7 @@ const ProductPage =({params}) => {
 
         {/* Sticky Add to Cart Button */}
         <div className="sticky bottom-0 bg-white p-2 border-t border-gray-400">
-          <button className="w-full  py-2 sm:py-4 bg-orange-600 text-white rounded-md hover:bg-blue-700">
+          <button onClick={handleAddToCart} className="w-full  py-2 sm:py-4 bg-orange-600 text-white rounded-md hover:bg-blue-700">
             Add to Cart
           </button>
         </div>

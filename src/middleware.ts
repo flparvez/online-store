@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
 // See "Matching Paths" below to learn more
 export const config = {
   matcher: [
-    '/cart',
+    // '/cart',
     '/admin',
     '/login',
     '/signup',
