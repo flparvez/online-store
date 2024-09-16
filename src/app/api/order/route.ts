@@ -4,7 +4,6 @@ import Order from "@/models/orderSchema";
 import User from "@/models/userSchema";
 import { Types } from "mongoose";
 import { NextResponse } from "next/server";
-import slugify from "slugify"; // Add this import at the top
 
 
 // get all orders
@@ -69,12 +68,9 @@ export const POST = async (request: Request) => {
       );
     }
 
-    // Manually generate the slug
-    const slug = slugify(name, { lower: true, strict: true });
 
     const newOrder = new Order({
       name,
-      slug, // Set the slug manually here
       email,
       phone,
       address,

@@ -1,56 +1,31 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-
-// const id ="66e2cc437c0562e6c3c227af"
-// for update
+// Define the API
 export const checkoutApi = createApi({
   reducerPath: 'orders',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
+  tagTypes: ['Order'],
   endpoints: (builder) => ({
 
-
+    // Mutation for adding an order
     addOrder: builder.mutation({
-      query: (body) =>    ({
-
-         url: `order?userId=${body?.userci}`,
+      query: (body) => ({
+        url: `order?userId=${body?.userci}`,
         method: 'POST',
         body,
       }),
-    //   invalidatesTags: [{ type: 'product', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Order', id: 'LIST' }],
     }),
-    
-    // editProduct: builder.mutation({
-    //   query: ({ productSlug, updatedProduct }) => ({
-    //     url: `product/${productSlug}?userId=${id}`,
-    //     method: 'PATCH',
-    //     body: updatedProduct,
-    //   }),
-    
-    // }),
 
+    // Query for getting orders
     getOrders: builder.query({
-        query: (id) =>   ({
-
-          url: `order?userId=${id}`,
-       }),
+      query: (id) => ({
+        url: `order?userId=${id}`,
+      }),
+      providesTags: [{ type: 'Order', id: 'LIST' }],
     }),
-    // getProductBySlug: builder.query({
-    //   query: (productSlug) => `product/${productSlug}`,
-    // }),
 
-
-    // deleteProduct: builder.mutation({
-    //   query: (productSlug) => ({
-    //     url: `product/${productSlug}?userId=${id}`,
-    //     method: 'DELETE',
-    //   }),
-    //   // invalidatesTags: (result, error, id) => [{ type: 'productId', id }],
-    // }),
-    
-    
   }),
-})
+});
 
-
-export const { useAddOrderMutation,useGetOrdersQuery } = checkoutApi;
+export const { useAddOrderMutation, useGetOrdersQuery } = checkoutApi;

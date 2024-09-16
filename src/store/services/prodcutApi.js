@@ -1,23 +1,20 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+const id = "66e2cc437c0562e6c3c227af";
 
-
-const id ="66e2cc437c0562e6c3c227af"
-// for update
-export const prodcutsApi = createApi({
+export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({ baseUrl: '/api/' }),
+  tagTypes: ['Product', 'Cart'],
   endpoints: (builder) => ({
 
-
     addProduct: builder.mutation({
-      query: (body) =>       ({
-
-         url: `product?userId=${id}`,
+      query: (body) => ({
+        url: `product?userId=${id}`,
         method: 'POST',
         body,
       }),
-      invalidatesTags: [{ type: 'product', id: 'LIST' }],
+      invalidatesTags: [{ type: 'Product', id: 'LIST' }, { type: 'Cart' }],
     }),
     
     editProduct: builder.mutation({
@@ -26,26 +23,41 @@ export const prodcutsApi = createApi({
         method: 'PATCH',
         body: updatedProduct,
       }),
-    
+      invalidatesTags: [{ type: 'Product', id: 'LIST' }, { type: 'Cart' }],
     }),
 
     getProducts: builder.query({
-        query: () => 'product/',
+      query: () => 'product/',
+      providesTags: [{ type: 'Product', id: 'LIST' }],
     }),
+
     getProductBySlug: builder.query({
       query: (productSlug) => `product/${productSlug}`,
+      providesTags: (result, error, productSlug) => [{ type: 'Product', id: productSlug }],
     }),
+
     deleteProduct: builder.mutation({
       query: (productSlug) => ({
         url: `product/${productSlug}?userId=${id}`,
         method: 'DELETE',
       }),
-      // invalidatesTags: (result, error, id) => [{ type: 'productId', id }],
+      invalidatesTags: [{ type: 'Product', id: 'LIST' }, { type: 'Cart' }],
     }),
-    
-    
+
+    // Add a query to get cart data
+    getCart: builder.query({
+      query: () => `cart?userId=${id}`,
+      providesTags: [{ type: 'Cart' }],
+    }),
+
   }),
-})
+});
 
-
-export const { useGetProductsQuery,useGetProductBySlugQuery,useAddProductMutation,useDeleteProductMutation,useEditProductMutation } = prodcutsApi
+export const {
+  useGetProductsQuery,
+  useGetProductBySlugQuery,
+  useAddProductMutation,
+  useDeleteProductMutation,
+  useEditProductMutation,
+  useGetCartQuery,
+} = productsApi;

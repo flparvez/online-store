@@ -13,6 +13,7 @@ const Home = () => {
   const {data} = useGetProductsQuery()
   const products = data?.products;
 //  console.log(data)
+if (!products) return <h2>Loading...</h2>
   return (
     <div>
       <div className='p-2'>

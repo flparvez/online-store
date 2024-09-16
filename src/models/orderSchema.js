@@ -8,10 +8,7 @@ const orderSchema = new Schema(
     phone: { type: Number, required: true },
     address: { type: String, required: true },
     city: { type: String, required: true },
-    slug: {
-      type: String,
-      unique: true,   // Slug should be unique
-    },
+  
  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 
  products: [],  // Array of product details

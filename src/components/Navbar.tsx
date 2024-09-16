@@ -1,10 +1,11 @@
 "use client"
 import React, { useState } from 'react';
 import { AiOutlineClose,AiOutlineMenu } from "react-icons/ai";
-import { FaShoppingCart } from 'react-icons/fa';
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Marquee from "react-fast-marquee";
+import { ShoppingCart } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,13 +30,13 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/">
-              <h2 className="text-sm font-bold text-gray-800">Unique Store</h2>
+              <h2 className="sm:text-xl text-sm font-bold text-gray-800">Unique Store</h2>
             </Link>
           </div>
 
          <div className="flex-shrink-0">
             <Link href="/auth/profile">
-              <h2 className="text-muted font-bold text-gray-800">Profile</h2>
+              <h2 className=" sm:text-muted text-sm font-bold text-gray-800">Profile</h2>
             </Link>
           </div>
 
@@ -72,10 +73,13 @@ const Navbar = () => {
           {/* Cart and Hamburger */}
           <div className="flex items-center">
             <Link href="/cart">
-              <h2 className="text-gray-800 hover:text-gray-600 mr-4">
-              Cart ({cart.items.reduce((acc:any, item:any) => acc + item.quantity, 0)})
-                <FaShoppingCart size={24} /> 
-              </h2>
+            <div className="relative inline-flex">
+             
+              <ShoppingCart className="w-10 h-8 text-gray-700" />
+              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-600 rounded-full">
+              ({cart.items.reduce((acc:any, item:any) => acc + item.quantity, 0)})
+        </span>
+        </div>
             </Link>
             <div className="md:hidden">
               <Button variant="ghost" onClick={toggleMenu}>
