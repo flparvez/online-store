@@ -47,6 +47,7 @@ export const POST = async (request: Request) => {
       total,
       status,
       transaction,
+      paymentType
     } = body;
 
     // Check userId and categoryId
@@ -79,6 +80,7 @@ export const POST = async (request: Request) => {
       total,
       status,
       transaction,
+      paymentType,
       user: new Types.ObjectId(userci),
     });
 

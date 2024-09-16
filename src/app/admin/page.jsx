@@ -1,22 +1,30 @@
 "use client"
 /** @format */
 import {  useDeleteProductMutation, useGetProductsQuery } from "@/store/services/prodcutApi";
-
+import {useGetSingleUserQuery} from '@/store/services/UserApi'
 import React, { useState } from "react";
 
 
-import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 import AdminProductTile from "@/components/ProductListAdmin";
 import SideNavbar from "@/components/sideNavbar";
+import { useRouter } from "next/navigation";
 
 
 
 
 
 export default function Home() {
+  const router = useRouter()
+  const { data, error, isLoading } = useGetSingleUserQuery();
+const user = data?.data
+if (isLoading) return <h2>Loading....</h2>
+const admin = user?.role === "admin"
 
-
+if (!admin) {
+  router.push('/not-admin')
+}
   return (
     
        

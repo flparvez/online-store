@@ -5,16 +5,16 @@ import React, { use, useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { useLoginUserMutation } from "@/store/services/UserApi";
+import {  useLoginUserMutation } from "@/store/services/UserApi";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 
 
 function Login() {
-  
+ const router = useRouter()
   const [loginUser] = useLoginUserMutation();
-  const router = useRouter()
+  
 
   const [user, setUser] = useState({
     email: "",
