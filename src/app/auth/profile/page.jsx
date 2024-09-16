@@ -1,25 +1,47 @@
-"use client"
-import React from 'react'
+"use client";
+import axios from "axios";
+import Link from "next/link";
+import React, {useEffect, useState} from "react";
+import {toast} from "react-hot-toast";
+import {useRouter} from "next/navigation";
 import {useGetSingleUserQuery} from '@/store/services/UserApi'
-import { useRouter } from 'next/navigation'
-const Profile = () => {
-  const router = useRouter()
-  const { data, error, isLoading } = useGetSingleUserQuery();
-const user = data?.data
-if (!data) {
-  router.push('/auth/login')
+import useFetchData from '@/hooks/UseFetchData';
+export  default   function  ProfilePage() {
+    const router = useRouter()
+  const {data, isLoading,isError} = useGetSingleUserQuery()
+    const logout = async () => {
+        try {
+            await axios.get('/api/auth/logout')
+            toast.success('Logout successful')
+            router.push('/auth/login')
+        } catch (error) {
+            console.log(error.message);
+            toast.error(error.message)
+        }
+    }
+
+
+const item =data?.data
+
+if (isLoading) return <p>Loading...</p>;
+if (isError) {
+    router.push('/auth/login');
 }
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading user profile</div>;
+    return (
+        <div className="flex flex-col items-center justify-center min-h-screen py-2">
+            <h1>Profile</h1>
+            <hr />
+            <p>Profile page</p>
+            <h2 className="text-black">{item?.username}</h2>
+          
+        <hr />
+        <button
+        onClick={logout}
+        className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >Logout</button>
 
-  return (
-    <div>
-      <h1>User Profile</h1>
-      <p>Name: {user.username}</p>
-      <p>Email: {user.email}</p>
-    </div>
+     
 
-  )
+            </div>
+    )
 }
-
-export default Profile

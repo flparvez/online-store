@@ -2,22 +2,23 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart } from '../../store/cartSlice';
-
-import {useGetSingleUserQuery} from '../../store/services/UserApi'
 import {useAddOrderMutation} from '../../store/services/CheckOutApi'
 import { useRouter } from 'next/navigation';
+import { useGetSingleUserQuery } from '@/store/services/UserApi';
 
 
 
 const CheckoutPage = () => {
 const router = useRouter()
+
+
 const [addOrder] = useAddOrderMutation()
 
-  const {data}=useGetSingleUserQuery()
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   
-// console.log(data?.data?._id)
+
     const [paymentDetails, setPaymentDetails] = useState({
       cname: '',
       email: '',
@@ -39,9 +40,17 @@ const [addOrder] = useAddOrderMutation()
       });
     };
   
+    const {data, isLoading,isError} = useGetSingleUserQuery()
 
+
+    const item =data?.data
+    
+    if (isLoading) return <p>Loading...</p>;
+      if (isError) {
+        router.push('/auth/login');
+      }
     const ndata = {
-      userci:data?.data?._id,
+      userci:item?._id,
       name:paymentDetails.cname,
       email:paymentDetails.email,
       phone:paymentDetails.phone,
@@ -53,7 +62,7 @@ const [addOrder] = useAddOrderMutation()
       paymentType:paymentDetails.paymentType
     }
 
-   
+ 
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
@@ -70,15 +79,10 @@ const [addOrder] = useAddOrderMutation()
       }
     };
 
-
-
-
-
-
-    
   const partial =80;
 
   if (cart.items.length === 0) return <h2>Your Cart is Empty</h2>
+
   return (
     <div>
     

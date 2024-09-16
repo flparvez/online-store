@@ -9,18 +9,18 @@ export const UserApi = createApi({
   endpoints: (builder) => ({
 
     getUsers: builder.query({
-      query: () => 'users/',
+      query: () => 'auth/',
       providesTags: ['UserList'],
     }),
 
     getSingleUser: builder.query({
-      query: () => 'users/me',
+      query: () => 'auth/me',
       providesTags: [{ type: 'User', id }],
     }),
 
     loginUser: builder.mutation({
       query: (body) => ({
-        url: 'users/login',
+        url: 'auth/login',
         method: 'POST',
         body,
       }),
@@ -29,7 +29,7 @@ export const UserApi = createApi({
 
     registerUser: builder.mutation({
       query: (body) => ({
-        url: 'users/register',
+        url: 'auth/register',
         method: 'POST',
         body,
       }),

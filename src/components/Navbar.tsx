@@ -94,8 +94,8 @@ const Navbar = () => {
       <Input placeholder="Search products..." className="w-full mb-4" />
       </div>
       </div>
-  
-<div className='font-bold'> <Marquee > আসসালামু আলাইকুম সম্মানিত সদস্য আপনাকে অভিনন্দন ওয়েবসাইটে প্রবেশ করার জন্য। আমাদের কাছে পেয়ে যাবেন টেকসই নিত্য প্রয়োজনীয় ইলেকট্রনিক মালামাল। আপনার পছন্দের প্রোডাক্ট  এড কার্ড করে এখনই অর্ডার করুন।</Marquee> </div>
+  {/* update */}
+<div className='font-bold'> <Marquee ><br /> আসসালামু আলাইকুম সম্মানিত সদস্য আপনাকে অভিনন্দন ওয়েবসাইটে প্রবেশ করার জন্য। আমাদের কাছে পেয়ে যাবেন টেকসই নিত্য প্রয়োজনীয় ইলেকট্রনিক মালামাল। আপনার পছন্দের প্রোডাক্ট  এড কার্ড করে এখনই অর্ডার করুন।</Marquee> </div>
       {/* Mobile Menu */}
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
