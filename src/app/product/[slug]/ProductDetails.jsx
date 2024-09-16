@@ -1,7 +1,7 @@
 "use client"
 
 import { useDispatch } from 'react-redux';
-import { addToCart } from '@/store/cartSlice';
+import { addItem } from '@/store/cartSlice';
 import {useGetProductBySlugQuery} from '@/store/services/prodcutApi'
 const ProductPage =({params}) => {
  
@@ -14,12 +14,12 @@ const product = data?.product;
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    dispatch(addToCart({
-      id: product._id,
+    dispatch(addItem({
+      product: product._id,
+      title: product.name,
       price: product.price,
-      quantity: product.quantity,
-      name: product.name,
-      img: product.images,
+      quantity: 1,
+      image: product.images,  // Assuming you have an image field
     }));
   };
   if (!product) return <div>Loading...</div>

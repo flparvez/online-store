@@ -4,13 +4,13 @@ import { prodcutsApi } from './services/prodcutApi'
 import { categoryApi } from './services/CategoryApi'
 import { UserApi } from './services/UserApi'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import cartSlice from './cartSlice'
+import cartReducer from './cartSlice'
 
 
 
 export const store = configureStore({
   reducer: {
-    cart: cartSlice,
+    cart: cartReducer,
     [prodcutsApi.reducerPath]: prodcutsApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [UserApi.reducerPath]: UserApi.reducer,

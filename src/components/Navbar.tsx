@@ -13,14 +13,15 @@ import {
   DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 import Link from 'next/link';
-
+import { useSelector } from 'react-redux';
+  
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
+  const cart = useSelector((state:any) => state.cart);
   return (
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,7 +73,8 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link href="/cart">
               <h2 className="text-gray-800 hover:text-gray-600 mr-4">
-                <FaShoppingCart size={24} />
+              Cart ({cart.items.reduce((acc:any, item:any) => acc + item.quantity, 0)})
+                <FaShoppingCart size={24} /> 
               </h2>
             </Link>
             <div className="md:hidden">
@@ -89,7 +91,7 @@ const Navbar = () => {
       </div>
       </div>
   
-<div className='font-bold'> <Marquee >আসসালামু আলাইকুম সম্মানিত সদস্য আপনাকে অভিনন্দন ওয়েবসাইটে প্রবেশ করার জন্য। আমাদের কাছে পেয়ে যাবেন টেকসই নিত্য প্রয়োজনীয় ইলেকট্রনিক মালামাল। আপনার পছন্দের প্রোডাক্ট  এড কার্ড করে এখনই অর্ডার করুন।</Marquee> </div>
+<div className='font-bold'> <Marquee > আসসালামু আলাইকুম সম্মানিত সদস্য আপনাকে অভিনন্দন ওয়েবসাইটে প্রবেশ করার জন্য। আমাদের কাছে পেয়ে যাবেন টেকসই নিত্য প্রয়োজনীয় ইলেকট্রনিক মালামাল। আপনার পছন্দের প্রোডাক্ট  এড কার্ড করে এখনই অর্ডার করুন।</Marquee> </div>
       {/* Mobile Menu */}
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">

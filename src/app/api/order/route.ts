@@ -39,13 +39,12 @@ export const POST = async (request: Request) => {
 
     const body = await request.json();
     const {
-      
+       items,
       name,
       email,
       phone,
       address,
       city,
-      products,
       total,
       status,
       transaction,
@@ -75,13 +74,12 @@ export const POST = async (request: Request) => {
 
     const newOrder = new Product({
       name,
-      // user:, connection with user
       slug, // Set the slug manually here
       email,
       phone,
       address,
       city,
-      products,
+      products: items,
       total,
       status,
       transaction,

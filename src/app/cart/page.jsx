@@ -1,18 +1,18 @@
 import React from 'react'
-import ShoppingCart from './CartPage'
-import { useSelector } from 'react-redux';
-const CartPage = () => {
+import CartPage from './CartPage'
+
+const Cart = () => {
 
  
 
   return (
     <div>
-      < ShoppingCart />
+      < CartPage />
     </div>
   )
 }
 
-export default CartPage
+export default Cart
 
 export const metadata= {
   title: "Cart Page",
