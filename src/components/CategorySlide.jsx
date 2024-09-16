@@ -1,5 +1,5 @@
 "use client"
-import  { Autoplay, Navigation, Pagination, } from 'swiper/modules';
+
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -11,16 +11,13 @@ import 'swiper/css/scrollbar';
 import { useGetCategoriesQuery } from '@/store/services/CategoryApi';
 
 
-const CategorySlides = ({products}) => {
+const CategorySlides = () => {
   const {data} = useGetCategoriesQuery()
 
   return (
     <div>
     <Swiper
-   autoplay={{
-     delay:3000,
-     disableOnInteraction:false,
-   }} 
+   autoplay={true}
    direction="horizontal"
    loop={true}
    speed={1300}
@@ -38,17 +35,16 @@ const CategorySlides = ({products}) => {
          {data?.map((product) => (
            <SwiperSlide key={product._id}>
              
-               <div className=" overflow-hidden">
-               <img
-               src={product.image}
-               alt="text" 
-               className="max-w-md h-[150px] object-cover rounded-t-lg"
-             />
-               </div>
-               <h3 className="text-xl font-bold mb-2 mt-2 text-center">{product.title}</h3>
-               <p className="text-gray-500 mb-2 text-center">{product.description}</p>
-            
-          
+             <div className="w-full rounded overflow-hidden justify-center items-center  shadow   bg-white">
+            <div className='text-center'>
+
+           
+      <img className="w-52 h-40 object-cover text-center " src={product.image} alt={product.title} />
+      </div>
+        <div className="font-bold text-xl text-center ">{product.title}</div>
+       
+     
+    </div>
    
            </SwiperSlide>
          ))}
