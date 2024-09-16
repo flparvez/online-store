@@ -1,19 +1,16 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/store/cartSlice';
+import {useGetProductBySlugQuery} from '@/store/services/prodcutApi'
 const ProductPage =({params}) => {
-  const [product, setProduct] = useState(null)
  
-  useEffect(() => {
-    async function fetchPosts() {
-      let res = await fetch(`/api/product/${params.slug}`)
-      let data = await res.json()
-      setProduct(data.product)
-    }
-    fetchPosts()
-  }, [params.slug])
-  // console.log(product)
+ const {data} = useGetProductBySlugQuery(params.slug)
+
+const product = data?.product;
+
+//  console.log(product)
+
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -28,6 +25,7 @@ const ProductPage =({params}) => {
   if (!product) return <div>Loading...</div>
  
   return (
+   
     <div className="container mx-auto p-4">
  
     {/* Product Info Section */}
