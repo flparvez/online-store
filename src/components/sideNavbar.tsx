@@ -39,7 +39,7 @@ export default function SideNavbar() {
           { title: "Category", href: "/admin/category", icon: UsersRound, variant: "ghost" },
           { title: "Add Product", href: "/admin/product/add", icon: UsersRound, variant: "ghost" },
           { title: "Users", href: "/admin/product/user", icon: UsersRound, variant: "ghost" },
-          { title: "Orders", href: "/admin/product/orders", icon: ShoppingCart, variant: "ghost" },
+          { title: "Orders", href: "/admin/order", icon: ShoppingCart, variant: "ghost" },
 
         ]}
       />
