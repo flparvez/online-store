@@ -34,8 +34,8 @@ const Navbar = () => {
           </div>
 
          <div className="flex-shrink-0">
-            <Link href="/admin">
-              <h2 className="text-muted font-bold text-gray-800">Admin</h2>
+            <Link href="/auth/profile">
+              <h2 className="text-muted font-bold text-gray-800">Profile</h2>
             </Link>
           </div>
 

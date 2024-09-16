@@ -1,7 +1,6 @@
 import { connectDb } from "@/lib/dbConfig";
 import Order from "@/models/orderSchema";
 
-import Product from "@/models/productSchema";
 import User from "@/models/userSchema";
 import { Types } from "mongoose";
 import { NextResponse } from "next/server";
@@ -39,6 +38,7 @@ export const POST = async (request: Request) => {
 
     const body = await request.json();
     const {
+      userci,
        items,
       name,
       email,
@@ -72,7 +72,7 @@ export const POST = async (request: Request) => {
     // Manually generate the slug
     const slug = slugify(name, { lower: true, strict: true });
 
-    const newOrder = new Product({
+    const newOrder = new Order({
       name,
       slug, // Set the slug manually here
       email,
@@ -83,7 +83,7 @@ export const POST = async (request: Request) => {
       total,
       status,
       transaction,
-      user: new Types.ObjectId(user),
+      user: new Types.ObjectId(userci),
     });
 
     await newOrder.save();
@@ -91,7 +91,7 @@ export const POST = async (request: Request) => {
     return new NextResponse(
       JSON.stringify({
         message: "Order created successfully",
-        product: newOrder,
+        order: newOrder,
       }),
       { status: 200 }
     );
@@ -102,3 +102,4 @@ export const POST = async (request: Request) => {
     );
   }
 };
+

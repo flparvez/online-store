@@ -7,6 +7,7 @@ export function middleware(request: NextRequest) {
 
   const isPublicPath = path === '/login' || path === '/signup' || path === '/verifyemail'
   const isAdmin = path === '/admin'
+  const loginuser = path === '/auth/login' || path === '/auth/register' 
   const token = request.cookies.get('token')?.value || ''
 
   if(isPublicPath && token) {
@@ -14,6 +15,9 @@ export function middleware(request: NextRequest) {
   } 
    if(isAdmin && !token) {
     return NextResponse.redirect(new URL('/not-admin', request.nextUrl))
+  }
+  if(loginuser && token) {
+    return NextResponse.redirect(new URL('/auth/profile', request.nextUrl))
   }
 
   if (!isPublicPath && !token) {
@@ -26,10 +30,10 @@ export function middleware(request: NextRequest) {
 // See "Matching Paths" below to learn more
 export const config = {
   matcher: [
-    // '/cart',
+    '/checkout',
     '/admin',
-    '/login',
-    '/signup',
+    
+    '/auth/profile',
     '/verifyemail'
   ]
 }

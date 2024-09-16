@@ -1,10 +1,5 @@
 import { Schema, model, models } from "mongoose";
 
-const cartSchema = new Schema({
-  product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
-  quantity: { type: Number, required: true },
-  price: { type: Number, required: true },
-});
 
 const orderSchema = new Schema(
   {
@@ -19,9 +14,9 @@ const orderSchema = new Schema(
     },
  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 
- products: [cartSchema],  // Array of product details
+ products: [],  // Array of product details
 
-    total: { type: Number, required: true },
+    total: { type: Number},
 
     status: { type: String, enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'], default: 'pending' },
 
