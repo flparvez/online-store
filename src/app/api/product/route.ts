@@ -16,8 +16,8 @@ export const GET =async ( request:Request) =>{
       await connectDb();
 
   
-      const products = await Product.find()
-      // const products = await Product.find(filter).sort({createdAt:"asc"})
+      const products = await Product.find().sort({ createdAt: -1 });
+   
 
       return new NextResponse(
         JSON.stringify({products}),{status:200}

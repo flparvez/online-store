@@ -8,7 +8,7 @@ import Link from "next/link";
 import OrderTable from "@/components/user/orderTable"
 export  default   function  ProfilePage() {
     const router = useRouter()
-  const {data, isLoading,isError} = useGetSingleUserQuery()
+  const {data, isError} = useGetSingleUserQuery()
     const logout = async () => {
         try {
             await axios.get('/api/auth/logout')

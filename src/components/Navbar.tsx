@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Marquee from "react-fast-marquee";
 import { ShoppingCart } from 'lucide-react';
+import {useGetSingleUserQuery} from '@/store/services/UserApi'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +18,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
   
 const Navbar = () => {
+  const {data, isLoading,isError} = useGetSingleUserQuery(null)
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -35,9 +37,15 @@ const Navbar = () => {
           </div>
 
          <div className="flex-shrink-0">
-            <Link href="/profile">
+
+          {data ? <Link href="/profile">
               <h2 className=" sm:text-muted text-sm font-bold text-gray-800">Profile</h2>
-            </Link>
+            </Link> : <Link  className=" sm:text-muted text-sm font-bold text-gray-800" href="/auth/login">
+              Login
+            </Link> }
+            
+
+
           </div>
 
          
