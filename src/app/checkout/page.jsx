@@ -85,7 +85,25 @@ const [addOrder] = useAddOrderMutation()
 
   return (
     <div>
-    
+    <div>
+      <h2 className="text-xl font-semibold mt-3 mb-4">Items</h2>
+      <div className="flex flex-col">
+        {cart.items.map((item) => (
+          <div key={item.id} className="flex items-center justify-center mb-4">
+            <img src={item.image} alt={item.title} className="w-16 h-16 mr-4" />
+            <div>
+              <h3 className="text-sm font-medium">{item.title}</h3>
+              <p className="text-black text-sm">
+                {item.quantity} x ${item.price.toFixed(2)}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+      </div>
+      <div className="flex justify-between items-center">
+        <h3 className="text-xl font-semibold">Total {ndata.total}</h3>
+    </div>
       <form className="bg-white rounded-lg shadow-md p-6" onSubmit={handleSubmit}>
       <h2 className="text-xl font-semibold mb-4">Checkout Details</h2>
       <div className="mb-4">
@@ -192,17 +210,19 @@ const [addOrder] = useAddOrderMutation()
         {paymentDetails.paymentType === 'partial' && (
           <div className="mb-4">
             <label htmlFor="partialAmount" className="block text-sm font-medium text-gray-700">Partial Amount <span className='text-red-600'>*</span></label>
-            <h2 className='block  text-center font-bold sm:text-2xl text-xl  text-gray-700'>Partial: {partial} + Delivery Charge: 120 = {partial + 120}</h2>
+            <h2 className='block  text-center font-bold sm:text-2xl text-xl  text-gray-700'>Pay ৳200 online & ৳{ndata.total - partial} with Cash on Delivery.</h2>
+
+            
           </div>
         )}
      {paymentDetails.paymentType === 'full' && (
           <div className="mb-4">
             <label htmlFor="partialAmount" className="block text-sm font-medium text-gray-700">Full Amount <span className='text-red-600'>*</span></label>
-            <h2 className='block  text-center font-bold sm:text-2xl text-xl  text-gray-700'>Total Price: {ndata?.total} + Delivery Charge: 100 = {ndata?.total + 100}</h2>
+            <h2 className='block  text-center font-bold sm:text-2xl text-xl  text-gray-700'> Pay Full Payment ৳{ndata.total + 100}</h2>
            
           </div>
         )}
-<h2 className='block  text-center font-bold sm:text-2xl text-xl  text-gray-700'>Bkash(personal): 01608257876</h2>
+<h2 className='block  text-center font-bold sm:text-2xl text-xl  text-gray-700 border'>Bkash(personal): 01608257876</h2>
 <br />
         {/* Transaction ID */}
         <div className="mb-4">
