@@ -22,7 +22,7 @@ export  default   function  ProfilePage() {
 
 const item =data?.data
 
-if (isLoading) return <p>Loading...</p>;
+if (!item) return <p>Loading...</p>;
 if (isError) {
     router.push('/auth/login');
 }

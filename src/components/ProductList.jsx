@@ -66,11 +66,11 @@ const ProductList = ({product}) => {
                 product?.price > 0 ? "line-through" : ""
               } text-lg font-semibold text-primary`}
             >
-              ${product?.price + 220}
+              ৳{product?.price + 220}
             </span>
             {product?.price > 0 ? (
               <span className="text-lg font-semibold text-primary">
-                ${product?.price}
+                ৳{product?.price}
               </span>
             ) : null}
           </div>

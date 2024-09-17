@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import {useGetOrdersQuery} from '../../store/services/CheckOutApi'
 
 
@@ -10,7 +10,7 @@ const {data} = useGetOrdersQuery(user._id)
 
 const orders= data?.orders
 const filteruser = orders?.filter((item)=> item.user === user._id)
-console.log(filteruser)
+if (!filteruser) return <h2>Loading....</h2>
   return (
     <div className="container mx-auto p-4">
     <h1 className="text-2xl font-semibold mb-4">My - Orders</h1>

@@ -86,7 +86,7 @@ const CartPage = () => {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">${item.price.toFixed(2)* item.quantity}</div>
+                          <div className="text-sm text-gray-900">৳{item.price.toFixed(2)* item.quantity}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
@@ -129,11 +129,11 @@ const CartPage = () => {
   </div>
   <div className="flex justify-between mb-2">
     <span>Shipping</span>
-    <span>$0.00</span>
+    <span>৳0.00</span>
   </div>
   <div className="flex justify-between font-semibold">
     <span>Total</span>
-    <span>$4555</span>
+    <span>৳4555</span>
   </div>
 </div>
 </div>

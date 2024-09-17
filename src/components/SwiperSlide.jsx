@@ -47,7 +47,7 @@ pagination={{clickable:true}}
             </div>
             <h3 className="text-xl font-bold mb-2 mt-2 text-center">{product.name}</h3>
             <p className="text-gray-500 mb-2 text-center">{product.category}</p>
-            <p className="text-lg font-bold text-center">${product.price}</p>
+            <p className="text-lg font-bold text-center">৳{product.price}</p>
             </Link>
           </div>
 

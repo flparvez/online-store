@@ -94,7 +94,7 @@ const [addOrder] = useAddOrderMutation()
             <div>
               <h3 className="text-sm font-medium">{item.title}</h3>
               <p className="text-black text-sm">
-                {item.quantity} x ${item.price.toFixed(2)}
+                {item.quantity} x ৳{item.price.toFixed(2)}
               </p>
             </div>
           </div>
