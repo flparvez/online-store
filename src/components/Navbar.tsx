@@ -1,12 +1,12 @@
-"use client"
-import React, { useState } from 'react';
-import { AiOutlineClose,AiOutlineMenu } from "react-icons/ai";
+'use client';
 
+import React, { useState } from 'react';
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Marquee from "react-fast-marquee";
 import { ShoppingCart } from 'lucide-react';
-import {useGetSingleUserQuery} from '@/store/services/UserApi'
+import { useGetSingleUserQuery } from '@/store/services/UserApi';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,18 +16,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
-  
+
 const Navbar = () => {
-  const {data, isLoading,isError} = useGetSingleUserQuery(null)
+  const { data, isLoading, isError } = useGetSingleUserQuery("");
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-  const cart = useSelector((state:any) => state.cart);
+  
+  const cart = useSelector((state: any) => state.cart);
+
   return (
-    <nav className="bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="max-w-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -36,19 +38,17 @@ const Navbar = () => {
             </Link>
           </div>
 
-         <div className="flex-shrink-0">
-
-          {data ? <Link href="/profile">
-              <h2 className=" sm:text-muted text-sm font-bold text-gray-800">Profile</h2>
-            </Link> : <Link  className=" sm:text-muted text-sm font-bold text-gray-800" href="/auth/login">
-              Login
-            </Link> }
-            
-
-
+          <div className="flex-shrink-0">
+            {data ? (
+              <Link href="/profile">
+                <h2 className="sm:text-muted text-sm font-bold text-gray-800">Profile</h2>
+              </Link>
+            ) : (
+              <Link className="sm:text-muted text-sm font-bold text-gray-800" href="/auth/login">
+                Login
+              </Link>
+            )}
           </div>
-
-         
 
           {/* Category Dropdown */}
           <div className="hidden md:block ml-6">
@@ -59,19 +59,13 @@ const Navbar = () => {
               <DropdownMenuContent>
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
-                    <Link href="/category/electronics">
-                      Electronics
-                    </Link>
+                    <Link href="/category/electronics">Electronics</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link href="/category/clothing">
-                      Clothing
-                    </Link>
+                    <Link href="/category/clothing">Clothing</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link href="/category/home">
-                      Home & Garden
-                    </Link>
+                    <Link href="/category/home">Home & Garden</Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
@@ -81,13 +75,12 @@ const Navbar = () => {
           {/* Cart and Hamburger */}
           <div className="flex items-center">
             <Link href="/cart">
-            <div className="relative inline-flex">
-             
-              <ShoppingCart className="w-10 h-8 text-gray-700" />
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-600 rounded-full">
-              ({cart.items.reduce((acc:any, item:any) => acc + item.quantity, 0)})
-        </span>
-        </div>
+              <div className="relative inline-flex">
+                <ShoppingCart className="w-10 h-8 text-gray-700" />
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-600 rounded-full">
+                  ({cart.items.reduce((acc: any, item: any) => acc + item.quantity, 0)})
+                </span>
+              </div>
             </Link>
             <div className="md:hidden">
               <Button variant="ghost" onClick={toggleMenu}>
@@ -96,25 +89,30 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-            {/* searchbar  */}
-            
-      <div className="px-2 w-full sm:max-w-full  space-y-1 ">
-      <Input placeholder="Search products..." className="w-full mb-4" />
+        
+        {/* Search bar */}
+        <div className="px-2 w-full sm:max-w-full space-y-1">
+          <Input placeholder="Search products..." className="w-full mb-4" />
+        </div>
       </div>
+
+      {/* Marquee */}
+      <div className="font-bold">
+        <Marquee>
+          <br />
+          আসসালামু আলাইকুম সম্মানিত সদস্য আপনাকে অভিনন্দন ওয়েবসাইটে প্রবেশ করার জন্য। আমাদের কাছে পেয়ে যাবেন টেকসই নিত্য প্রয়োজনীয় ইলেকট্রনিক মালামাল। আপনার পছন্দের প্রোডাক্ট এড কার্ড করে এখনই অর্ডার করুন।
+        </Marquee>
       </div>
-  {/* update */}
-<div className='font-bold'> <Marquee ><br /> আসসালামু আলাইকুম সম্মানিত সদস্য আপনাকে অভিনন্দন ওয়েবসাইটে প্রবেশ করার জন্য। আমাদের কাছে পেয়ে যাবেন টেকসই নিত্য প্রয়োজনীয় ইলেকট্রনিক মালামাল। আপনার পছন্দের প্রোডাক্ট  এড কার্ড করে এখনই অর্ডার করুন।</Marquee> </div>
+
       {/* Mobile Menu */}
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          
           <Link href="/">
             <h2 onClick={toggleMenu} className="block text-gray-800 hover:text-gray-600">Home</h2>
           </Link>
           <Link href="/shop">
             <h2 onClick={toggleMenu} className="block text-gray-800 hover:text-gray-600">Shop</h2>
           </Link>
-          
           <Link href="/about">
             <h2 onClick={toggleMenu} className="block text-gray-800 hover:text-gray-600">About</h2>
           </Link>
@@ -123,29 +121,23 @@ const Navbar = () => {
           </Link>
         </div>
         <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="w-full text-left">Categories</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <Link href="/category/electronics" onClick={toggleMenu}>
-                    Electronics
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/category/clothing" onClick={toggleMenu}>
-                    Clothing
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/category/home" onClick={toggleMenu}>
-                    Home & Garden
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="w-full text-left">Categories</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <Link href="/category/electronics" onClick={toggleMenu}>Electronics</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/category/clothing" onClick={toggleMenu}>Clothing</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/category/home" onClick={toggleMenu}>Home & Garden</Link>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </nav>
   );

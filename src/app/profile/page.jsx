@@ -4,9 +4,11 @@ import axios from "axios";
 import {toast} from "react-hot-toast";
 import {useRouter} from "next/navigation";
 import {useGetSingleUserQuery} from '@/store/services/UserApi'
-import Link from "next/link";
+
 import OrderTable from "@/components/user/orderTable"
 export  default   function  ProfilePage() {
+   
+  
     const router = useRouter()
   const {data, isError} = useGetSingleUserQuery()
     const logout = async () => {
@@ -48,10 +50,6 @@ if (isError) {
       </div>
     </div>
         <div>
-
-       
-        
-
      
 </div>
             </div>

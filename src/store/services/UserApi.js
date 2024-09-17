@@ -8,19 +8,7 @@ export const UserApi = createApi({
   tagTypes: ['User', 'UserList'],
   endpoints: (builder) => ({
 
-    getUsers: builder.query({
-      query: () => 'auth/',
-      providesTags: ['UserList'],
-    }),
 
-    getSingleUser: builder.query({
-      query: () => 'auth/me',
-      providesTags: [{ type: 'User', id }],
-    }),
-    logoutUser: builder.query({
-      query: () => '/api/auth/logout',
-      providesTags: [{ type: 'User', id }],
-    }),
 
     loginUser: builder.mutation({
       query: (body) => ({
@@ -30,6 +18,23 @@ export const UserApi = createApi({
       }),
       invalidatesTags: [{ type: 'User', id }],
     }),
+
+    logoutUser: builder.query({
+      query: () => '/api/auth/logout',
+      providesTags: [{ type: 'User', id }],
+    }),
+
+    getUsers: builder.query({
+      query: () => 'auth/',
+      providesTags: ['UserList'],
+    }),
+
+    getSingleUser: builder.query({
+      query: () => 'auth/me',
+      providesTags: [{ type: 'User', id }],
+    }),
+
+
 
     registerUser: builder.mutation({
       query: (body) => ({

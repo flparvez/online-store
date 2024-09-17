@@ -30,8 +30,10 @@ export default function RootLayout({
         {/* <SideNavbar  /> */}
         {/* main page */}
         <div className="p-4 w-full">
-          <Navbar />
-          {children}</div>
+          <Navbar  />
+          {children}
+          
+          </div>
 
         </Provider>
       </body>

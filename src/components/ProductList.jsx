@@ -11,7 +11,7 @@ import {
 import React from "react";
 
 import Link from "next/link";
-import { Button } from "./ui/button";
+
 
 import Image from "next/image";
 import { Badge } from "./ui/badge";
@@ -25,7 +25,7 @@ const ProductList = ({product}) => {
     return text.substring(0, maxLength) + "...";
   }
 }
-console.log(product)
+
   return (
    
     // <div className=" w-full">

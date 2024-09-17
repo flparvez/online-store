@@ -32,10 +32,14 @@ if (!filteruser) return <h2>Loading....</h2>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {filteruser?.map((order) => (
-            <tr key={order.id}>
+            <tr key={order._id}>
               <td className="px-6 py-4 whitespace-nowrap">{order._id}</td>
               <td className="px-6 py-4 whitespace-nowrap">{order.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{order.products.map((product) => <h2 key={product._id}>{product.title} price : {product.price} qty : {product.quantity}</h2>)}</td>  {/* show products */}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div>
+                {order.products.map((product) => <h2 key={product.product}>{product.title} price : {product.price} qty : {product.quantity}</h2>)}
+                </div>
+                </td>  {/* show products */}
               <td className="px-6 py-4 whitespace-nowrap">{order.email}</td>
               <td className="px-6 py-4 whitespace-nowrap">{order.phone}</td>
               <td className="px-6 py-4 whitespace-nowrap">{order.address}</td>
