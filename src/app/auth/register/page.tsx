@@ -46,9 +46,9 @@ const Register = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const newUser= await registerUser(data).unwrap();
     if (newUser) {
-      console.log("User Create succesfully")
-      alert("User Created successfully")
-       router.push('/auth/profile')
+      
+      alert("Acount Created successfully")
+       router.push('/')
      }else{
       alert("User Create Failed")
      }
