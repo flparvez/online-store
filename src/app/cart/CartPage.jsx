@@ -111,6 +111,7 @@ const CartPage = () => {
               Clear Cart
             </button>
             <br />
+            <br />
             <h2
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
               
@@ -120,23 +121,6 @@ const CartPage = () => {
             </h2>
           </div>
 
-          <div className="md:w-1/3">
-<div className="bg-white rounded-lg shadow-md p-6 mb-4">
-  <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-  <div className="flex justify-between mb-2">
-    <span>Subtotal</span>
-    <span>5445</span>
-  </div>
-  <div className="flex justify-between mb-2">
-    <span>Shipping</span>
-    <span>৳0.00</span>
-  </div>
-  <div className="flex justify-between font-semibold">
-    <span>Total</span>
-    <span>৳4555</span>
-  </div>
-</div>
-</div>
         </div>
         
       )}

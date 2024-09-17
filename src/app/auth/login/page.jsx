@@ -5,12 +5,14 @@ import {useRouter} from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-
+import {useGetSingleUserQuery} from '@/store/services/UserApi'
 
 
 
 export default function LoginPage() {
     const router = useRouter();
+    const {data, isError} = useGetSingleUserQuery("")
+ 
     const [user, setUser] = React.useState({
         email: "",
         password: "",
@@ -27,12 +29,17 @@ export default function LoginPage() {
          if (!response) {
             alert("Login failed");
          }
-            toast.success("Login success");
-            router.push("/");
-        } catch (error:any) {
+           
+         router.push("/profile").then(() => {
+            // Reload the page after routing
+            window.location.reload();
+          });
+            
+        } catch (error) {
             console.log("Login failed", error.message);
             toast.error(error.message);
         } finally{
+            
         setLoading(false);
         }
     }
@@ -44,6 +51,7 @@ export default function LoginPage() {
             setButtonDisabled(true);
         }
     }, [user]);
+
 
     return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">

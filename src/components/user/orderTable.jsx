@@ -6,7 +6,7 @@ import {useGetOrdersQuery} from '../../store/services/CheckOutApi'
 
 const OrderTable = ({user}) => {
 
-const {data} = useGetOrdersQuery(user._id)
+const {data} = useGetOrdersQuery(user?._id)
 
 const orders= data?.orders
 const filteruser = orders?.filter((item)=> item.user === user._id)

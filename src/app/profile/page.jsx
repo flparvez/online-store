@@ -10,12 +10,13 @@ export  default   function  ProfilePage() {
    
   
     const router = useRouter()
-  const {data, isError} = useGetSingleUserQuery()
+  const {data, isError,isLoading} = useGetSingleUserQuery()
     const logout = async () => {
         try {
             await axios.get('/api/auth/logout')
             toast.success('Logout successful')
             router.push('/auth/login')
+            window.location.reload();
         } catch (error) {
             console.log(error.message);
             toast.error(error.message)
@@ -24,10 +25,8 @@ export  default   function  ProfilePage() {
 
 const item =data?.data
 
-if (!item) return <p>Loading...</p>;
-if (isError) {
-    router.push('/auth/login');
-}
+if (isLoading) return <p>Loading...</p>;
+
     return (
 
         <div className="flex">

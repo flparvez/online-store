@@ -7,6 +7,8 @@ export function middleware(request: NextRequest) {
 
   const isPublicPath = path === '/login' || path === '/signup' || path === '/verifyemail'
 
+  // const loginPath = path === '/auth/login' || path === '/auth/register'
+
   const token = request.cookies.get('token')?.value || ''
 
   if(isPublicPath && token) {
@@ -24,6 +26,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
  '/admin/:path*',
+ '/profile',
   ]
 }
 

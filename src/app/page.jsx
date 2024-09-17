@@ -9,7 +9,7 @@ import React from 'react'
 
 
 const Home = () => {
- 
+  
   const {data} = useGetProductsQuery()
   const products = data?.products;
 //  console.log(data)
