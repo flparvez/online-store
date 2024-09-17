@@ -71,7 +71,7 @@ const [addOrder] = useAddOrderMutation()
          setIsProcessing(false)
       dispatch(clearCart());
       alert('Order placed successfully!');
-       router.push('/auth/profile')
+       router.push('/')
       } catch (err) {
 
       alert('Failed to place order.');
