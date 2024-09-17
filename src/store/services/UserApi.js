@@ -17,6 +17,10 @@ export const UserApi = createApi({
       query: () => 'auth/me',
       providesTags: [{ type: 'User', id }],
     }),
+    logoutUser: builder.query({
+      query: () => '/api/auth/logout',
+      providesTags: [{ type: 'User', id }],
+    }),
 
     loginUser: builder.mutation({
       query: (body) => ({
@@ -44,4 +48,5 @@ export const {
   useGetSingleUserQuery,
   useLoginUserMutation,
   useRegisterUserMutation,
+  useLogoutUserQuery
 } = UserApi;

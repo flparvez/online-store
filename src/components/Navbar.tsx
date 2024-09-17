@@ -35,7 +35,7 @@ const Navbar = () => {
           </div>
 
          <div className="flex-shrink-0">
-            <Link href="/auth/profile">
+            <Link href="/profile">
               <h2 className=" sm:text-muted text-sm font-bold text-gray-800">Profile</h2>
             </Link>
           </div>

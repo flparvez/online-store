@@ -16,6 +16,7 @@ const product = data?.product;
   const handleAddToCart = () => {
     dispatch(addItem({
       product: product._id,
+      slug: product.slug,
       title: product.name,
       price: product.price,
       quantity: 1,
