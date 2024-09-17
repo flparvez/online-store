@@ -1,13 +1,16 @@
 "use client"
 
-
+import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import 'swiper/css/navigation';
+
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { useGetCategoriesQuery } from '@/store/services/CategoryApi';
 
 
@@ -16,22 +19,28 @@ const CategorySlides = () => {
 
   return (
     <div>
-    <Swiper
-   autoplay={true}
-   direction="horizontal"
-   loop={true}
-   speed={1300}
-   watchSlidesProgress={true}
-   parallax={true}
-   pagination={{clickable:true}}
-         breakpoints={{
-           640: { slidesPerView: 1 },
-           540: { slidesPerView: 1 },
-           768: { slidesPerView: 2 },
-           968: { slidesPerView: 3 },
-           1024: { slidesPerView: 4 },
-         }}
-       >
+  <Swiper
+        // spaceBetween={30}
+        centeredSlides={true}
+        parallax={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          540: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          968: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper"
+      >
          {data?.map((product) => (
            <SwiperSlide key={product._id}>
              
@@ -49,6 +58,8 @@ const CategorySlides = () => {
            </SwiperSlide>
          ))}
        </Swiper>
+
+       
       </div>
   )
 }

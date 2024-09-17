@@ -9,11 +9,12 @@ import {
   } from "@/components/ui/card"
   
 import React from "react";
-import Image from "next/image";
-import { cn } from "@/lib/utils"; // Assuming you have this utility for conditional classes
+
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Badge } from "lucide-react";
+
+import Image from "next/image";
+import { Badge } from "./ui/badge";
 
 
 
@@ -24,6 +25,7 @@ const ProductList = ({product}) => {
     return text.substring(0, maxLength) + "...";
   }
 }
+console.log(product)
   return (
    
     // <div className=" w-full">
@@ -31,16 +33,17 @@ const ProductList = ({product}) => {
       <div >
         <Link href={`/product/${product.slug}`} >
         <div className="relative">
-          <img
+          <Image width={300} height={300}
             src={product?.images}
             alt={product?.name}
-            className="w-full h-[300px] object-cover rounded-t-lg"
+            className="w-full sm:h-[300px] h-[250px] object-cover rounded-t-lg"
           />
-          {product?.totalStock === 0 ? (
-            <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
+  
+          {product?.stock === 0 ? (
+            <Badge className="absolute top-2 left-2  bg-red-500 hover:bg-red-600">
               Out Of Stock
             </Badge>
-          ) : product?.totalStock < 10 ? (
+          ) : product?.stock < 30? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
               {`Only ${product?.stock} items left`}
             </Badge>
@@ -79,7 +82,7 @@ const ProductList = ({product}) => {
         </Link>
       </div>
       
-      <CardFooter>
+      {/* <CardFooter>
         {product?.stock === 0 ? (
           <Button className="w-full opacity-60 cursor-not-allowed">
             Out Of Stock
@@ -92,7 +95,7 @@ const ProductList = ({product}) => {
             Add to cart
           </Button>
         )}
-      </CardFooter>
+      </CardFooter> */}
     </Card>
        
 
