@@ -1,11 +1,10 @@
 "use client";
 import axios from "axios";
-import Link from "next/link";
-import React, {useEffect, useState} from "react";
+
 import {toast} from "react-hot-toast";
 import {useRouter} from "next/navigation";
 import {useGetSingleUserQuery} from '@/store/services/UserApi'
-import useFetchData from '@/hooks/UseFetchData';
+
 export  default   function  ProfilePage() {
     const router = useRouter()
   const {data, isLoading,isError} = useGetSingleUserQuery()
