@@ -242,7 +242,7 @@ const [addOrder] = useAddOrderMutation()
         </div>
 
   {/* ordertrack ID */}
-        <div className="mb-4 hidden">
+        <div className="mb-4 ">
           <label htmlFor="ordertrack" className="block text-sm font-medium text-gray-700">ordertrack Link <span className='text-red-600'>*</span></label>
           <input
             type="text"
