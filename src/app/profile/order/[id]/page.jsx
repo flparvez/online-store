@@ -18,7 +18,17 @@ const OrderPage = ({params}) => {
       <h2 className="text-xl  font-semibold mb-4">Order ID: {order._id}</h2>
       <div className="mb-4">
         <span className="font-medium">Customer Name:</span> {order.name}
-      </div>
+      </div>   
+      
+       <div className="mb-4">
+        <span className="font-medium">Tracking number:</span> <Link href={order.ordertrack}>Tracking Link</Link>
+      </div>  
+      {
+        order.paymentType === "partial" ?   <div className="mb-4">
+        <span className="font-medium">Pay Cash On Delivery:</span> {order.total -200} Tk
+      </div> : ""
+      }
+      
       <div className="mb-4">
         <span className="font-medium">Email:</span> {order.email}
       </div>
@@ -36,6 +46,9 @@ const OrderPage = ({params}) => {
       </div>
       <div className="mb-4">
         <span className="font-medium">Status:</span> {order.status}
+      </div>    
+       <div className="mb-4">
+        <span className="font-medium">paymentType:</span> {order.paymentType}
       </div>
       <div className="mb-4">
         <span className="font-bold text-xl">Products:</span>
