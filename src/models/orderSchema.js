@@ -18,7 +18,8 @@ const orderSchema = new Schema(
     status: { type: String, enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'], default: 'pending' },
     paymentType: { type: String, enum: ['full', 'partial', ]},
     transaction: { type: String, required: true },
-    ordertrack: { type: String, required:true},
+    ordertrack: { type: String, default: '/test/order' },
+    // add
   },
   { timestamps: true }
 );

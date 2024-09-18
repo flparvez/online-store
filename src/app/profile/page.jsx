@@ -30,9 +30,9 @@ if (isLoading) return <p>Loading...</p>;
     return (
 
         <div className="flex">
-     {/* SideBar */}
+   
       <div className="flex-1 p-6">
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <div className="flex flex-col items-center justify-center  py-2">
             <h1>Profile</h1>
             <hr />
             <p>Profile page</p>
