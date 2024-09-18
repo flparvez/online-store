@@ -3,7 +3,16 @@
 import React from 'react';
 import {useGetOrdersQuery} from '../../store/services/CheckOutApi'
 import Link from 'next/link';
+import {
+  Table,
+  TableBody,
 
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 
 const OrderTable = ({user}) => {
@@ -20,33 +29,36 @@ const truncateText = (text, maxLength) => {
 }
 if (!filteruser) return <h2>Loading....</h2>
   return (
-    <div className="sm:container mx-auto sm:px-4 py-8 px-2">
-    <h1 className="text-4xl font-bold text-center mb-8">My Orders</h1>
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white divide-y divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer Name</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Amount</th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {filteruser.map((order) => (
-            <tr key={order._id}>
-              <td className="px-6 py-4 whitespace-nowrap"> <Link href={`/profile/order/${order._id}`}>{truncateText(order._id,5)}</Link>  </td>
-              <td className="px-6 py-4 whitespace-nowrap">{new Date(order.createdAt).toLocaleDateString()}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{order.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{order.status}</td>
-              <td className="px-6 py-4 whitespace-nowrap">৳{order.total.toFixed(2)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div >
+    
+    <h1 className="sm:text-3xl text-xl font-bold text-center mb-8">My Orders</h1>
+    <Table>
+      
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[100px]">Order Id</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead>Customer Name</TableHead>
+          <TableHead>Status</TableHead>
+          
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {filteruser.map((invoice) => (
+          <TableRow key={invoice.invoice}>
+            <TableCell className="font-medium"><Link href={`/profile/order/${invoice._id}`}>{truncateText(invoice._id,5)}</Link></TableCell>
+            <TableCell>{new Date(invoice.createdAt).toLocaleDateString()}</TableCell>
+            <TableCell>{invoice.name}</TableCell>
+            <TableCell>{invoice.status}</TableCell>
+  
+          </TableRow>
+        ))}
+      </TableBody>
+      
+    </Table>
+    
     </div>
-  </div>
+ 
   );
 };
 

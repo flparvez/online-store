@@ -1,20 +1,21 @@
 "use client"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import {useGetOrderByIdQuery} from '../../../../store/services/CheckOutApi'
+import Link from 'next/link';
 const OrderPage = ({params}) => {
 
     const {data} = useGetOrderByIdQuery(params.id)
     if (data) {
       const order = data?.order;
-
-  
+      
     
 
   return (
     // <h2>Test</h2>
     <div className="container mx-auto px-4 py-8">
-    <h1 className="text-4xl font-bold text-center mb-8">Order Details</h1>
+    <h1 className="sm:text-4xl text-2xl font-bold text-center mb-8">Order Details</h1>
     <div className="bg-white shadow-md rounded-lg p-6">
-      <h2 className="text-2xl font-semibold mb-4">Order ID: {order._id}</h2>
+      <h2 className="text-xl  font-semibold mb-4">Order ID: {order._id}</h2>
       <div className="mb-4">
         <span className="font-medium">Customer Name:</span> {order.name}
       </div>
@@ -38,24 +39,32 @@ const OrderPage = ({params}) => {
       </div>
       <div className="mb-4">
         <span className="font-bold text-xl">Products:</span>
-        <table className="min-w-full bg-white divide-y divide-gray-200 mt-4">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {order.products.map((product) => (
-              <tr key={product.product}>
-                <td className="px-6 py-4 whitespace-nowrap">{product.title}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{product.quantity}</td>
-                <td className="px-6 py-4 whitespace-nowrap">৳{product.price.toFixed(2)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table>
+      
+      <TableHeader>
+        <TableRow>
+          <TableHead >Product</TableHead>
+          <TableHead>Quantity</TableHead>
+          <TableHead>Price</TableHead>
+         
+          
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {order.products.map((product) => (
+          <TableRow key={product.product}>
+
+            <TableCell>{product.title}</TableCell>
+            <TableCell>{product.quantity}</TableCell>
+            <TableCell>৳{product.price.toFixed(2)}</TableCell>
+  
+          </TableRow>
+        ))}
+      </TableBody>
+      
+    </Table>
+    
+       
       </div>
     </div>
   </div>
