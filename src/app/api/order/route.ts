@@ -47,6 +47,7 @@ export const POST = async (request: Request) => {
       total,
       status,
       transaction,
+      ordertrack,
       paymentType
     } = body;
 
@@ -80,6 +81,7 @@ export const POST = async (request: Request) => {
       total,
       status,
       transaction,
+      ordertrack,
       paymentType,
       user: new Types.ObjectId(userci),
     });

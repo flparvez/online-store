@@ -17,6 +17,16 @@ export const checkoutApi = createApi({
       invalidatesTags: [{ type: 'Order', id: 'LIST' }],
     }),
 
+    // Edit Order
+
+    editOrder: builder.mutation({
+      query: ({ id, updatedOrder }) => ({
+        url: `/order/${id}`,
+        method: 'PATCH',
+        body: updatedOrder,
+      }),
+      invalidatesTags: [{ type: 'Order', id: 'LIST' }],
+    }),
     // Query for getting orders
     getOrders: builder.query({
       query: (id) => ({
@@ -36,4 +46,4 @@ export const checkoutApi = createApi({
   }),
 });
 
-export const { useAddOrderMutation, useGetOrdersQuery,useGetOrderByIdQuery } = checkoutApi;
+export const { useAddOrderMutation, useGetOrdersQuery,useGetOrderByIdQuery,useEditOrderMutation } = checkoutApi;

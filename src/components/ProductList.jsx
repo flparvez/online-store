@@ -26,7 +26,7 @@ const ProductList = ({product}) => {
   return (
    
     // <div className=" w-full">
-   <Card className="w-full max-w-sm mx-auto">
+   <Card >
       <div >
         <Link href={`/product/${product.slug}`} >
         <div className="relative">
