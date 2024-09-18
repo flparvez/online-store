@@ -1,5 +1,5 @@
 import { connectDb } from "@/lib/dbConfig";
-import Category from "@/models/categorySchema";
+
 import Product from "@/models/productSchema";
 import User from "@/models/userSchema";
 import { Types } from "mongoose";

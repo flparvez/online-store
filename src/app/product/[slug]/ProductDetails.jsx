@@ -3,6 +3,7 @@
 import { useDispatch } from 'react-redux';
 import { addItem } from '@/store/cartSlice';
 import {useGetProductBySlugQuery} from '@/store/services/prodcutApi'
+import Image from 'next/image';
 const ProductPage =({params}) => {
  
  const {data} = useGetProductBySlugQuery(params.slug)
@@ -20,8 +21,9 @@ const product = data?.product;
       title: product.name,
       price: product.price,
       quantity: 1,
-      image: product.images,  // Assuming you have an image field
+      image: product.images,  
     }));
+    alert('Product added to cart!');
   };
   if (!product) return <div>Loading...</div>
  
@@ -33,7 +35,7 @@ const product = data?.product;
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
            {/* Product Image */}
            <div className="relative">
-        <img
+        <Image width={300} height={300}
           src={product.images}
           alt="Product Image"
           className="w-full min-h-min md:h-[70%] sm:h-full h-80 object-cover rounded-md"
@@ -48,7 +50,7 @@ const product = data?.product;
           <h1 className="sm:text-3xl text-2xl font-bold mb-4">{product.name}</h1>
 
           {/* Product Price */}
-          <p className="text-xl sm:text-2xl text-green-600 font-semibold mb-4">${product.price}</p>
+          <p className="text-xl sm:text-2xl text-green-600 font-semibold mb-4">৳{product.price}</p>
 
           {/* Product Stock */}
           <p className="text-md text-gray-700 mb-4">Stock:{product.stock}</p>

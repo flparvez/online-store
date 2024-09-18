@@ -24,8 +24,16 @@ export const checkoutApi = createApi({
       }),
       providesTags: [{ type: 'Order', id: 'LIST' }],
     }),
+        // Query for getting single order
+    getOrderById: builder.query({
+      query: (id) => ({
+        url: `order/${id}`,
+      }),
+      providesTags: [{ type: 'Order', id: 'LIST' }],
+    }),
+    
 
   }),
 });
 
-export const { useAddOrderMutation, useGetOrdersQuery } = checkoutApi;
+export const { useAddOrderMutation, useGetOrdersQuery,useGetOrderByIdQuery } = checkoutApi;

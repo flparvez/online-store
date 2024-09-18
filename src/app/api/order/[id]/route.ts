@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 //  get single order By id
 export const GET = async (request:Request,context: { params:any}) =>{
     const id = context.params.id;
-    console.log(id)
+   
     try {
     
       
