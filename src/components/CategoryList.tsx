@@ -2,19 +2,36 @@ import { Card, CardContent, CardFooter } from "./ui/card";
 import { Button } from "./ui/button";
 // import { brandOptionsMap, categoryOptionsMap } from "@/config";
 import { Badge } from "./ui/badge";
+import Link from "next/link";
+import Image from "next/image";
+import { useGetSingleUserQuery } from "@/store/services/UserApi";
+import { useDeleteCategoryMutation } from "@/store/services/CategoryApi";
 
 function ShoppingProductTile({
   product,
 //   handleGetProductDetails,
 //   handleAddtoCart,
 }:any) {
+  const {data, isError,isLoading} = useGetSingleUserQuery("")
+    const [deleteCategory] = useDeleteCategoryMutation(); 
+
+  const userId =data?.data._id
+     
+     
+  if (userId) {
+    const handleDelete = async (id:any) => {
+      await deleteCategory({id, userId}).unwrap();
+      };
+
+   
+ 
   return (
     <Card className="w-full max-w-sm mx-auto">
       <div>
-      {/* <div onClick={() => handleGetProductDetails(product?._id)}> */}
+    
         <div className="relative">
-          <img
-            src={product?.image}
+          <Image width={300} height={300}
+            src={product?.image} 
             alt={product?.title}
             className="w-full h-[300px] object-cover rounded-t-lg"
           />
@@ -43,18 +60,8 @@ function ShoppingProductTile({
             </span>
           </div>
           <div className="flex justify-between items-center mb-2">
-            <span
-              className={`${
-                product?.salePrice > 0 ? "line-through" : ""
-              } text-lg font-semibold text-primary`}
-            >
-              ৳{product?.price}
-            </span>
-            {product?.salePrice > 0 ? (
-              <span className="text-lg font-semibold text-primary">
-                ৳{product?.salePrice}
-              </span>
-            ) : null}
+            <h2> <Link href={`/admin/category/edit/${product._id}`}>Edit Category</Link> </h2>
+            <h2 className="bg-red-600"> <button onClick={() => handleDelete(product?._id)}>Delete</button> </h2>
           </div>
         </CardContent>
       </div>
@@ -62,5 +69,5 @@ function ShoppingProductTile({
     </Card>
   );
 }
-
+}
 export default ShoppingProductTile;

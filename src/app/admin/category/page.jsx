@@ -30,12 +30,15 @@ if (!isLoading)
   <h2> <Link href='/admin/category/add'> Add New Category</Link></h2>
           {categories && categories.length > 0
             ? categories.map((productItem) => (
-                // eslint-disable-next-line react/jsx-key
-                <ShoppingProductTile 
-                  // handleGetProductDetails={handleGetProductDetails}
+              <div key={productItem._id}>
+                  <ShoppingProductTile 
+                  
                   product= {productItem}
-                  // handleAddtoCart={handleAddtoCart}
+               
                 />
+              </div>
+              
+              
               ))
             : null}
         </div>

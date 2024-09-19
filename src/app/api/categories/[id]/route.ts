@@ -4,10 +4,45 @@ import User from "@/models/userSchema";
 import { Types } from "mongoose";
 import { NextResponse } from "next/server";
 
+
+
+// Get CategoryById
+export const GET = async (request:Request,context: { params:any}) =>{
+    const id = context.params.id;
+   
+    try {
+       if (!id ) {
+            return new NextResponse(
+                JSON.stringify({message:"Inavlid or missing Id"}),
+                {status:400}
+            )
+        }
+    
+        await connectDb();
+     
+      const category = await Category.findById(id)
+    
+      if (!category) {
+    
+        return new NextResponse (
+            JSON.stringify({message:"Category not found or does not exist"}),
+            {status:404});
+    
+      }
+    
+      return new NextResponse(
+        JSON.stringify({message:"Category fetched successfully",category}),{status:200}
+      )
+    } catch (error:any) {
+        return new NextResponse("Category Fetched Error: " + error.message,{status:400})
+    }
+    }
+
+
 //  PATCH request
 
 export const PATCH  = async (request:  Request,context: {params:any })=>{
-    const categoryId = context.params.category;
+    const categoryId = context.params.id;
 
 
     try {
@@ -17,7 +52,7 @@ const {title,description,image} = body;
 
 const { searchParams } = new URL(request.url);
 const userId = searchParams.get("userId");
-// console.log(userId)
+console.log(userId)
 
 if (!userId || !Types.ObjectId.isValid(userId!)) {
 return new NextResponse(
@@ -39,10 +74,10 @@ const user = await User.findById(userId);
 if (!user) {
     return new NextResponse (
         JSON.stringify({message:"User not found"}),
-        {status:404}
+        {status:405}
     )
 }
-const category = await Category.findOne({_id:categoryId,user:userId});
+const category = await Category.findById(categoryId);
 
 if (!category) {
     return new NextResponse (
@@ -67,9 +102,9 @@ return new NextResponse(JSON.stringify({message:"Category updated successfully",
     }
 }
 
-
+// deleteByid
 export const DELETE =async (request:Request, context: {params :any})=>{
-    const categoryId = context.params.category;
+    const categoryId = context.params.id;
 try {
     const { searchParams } = new URL(request.url);
 const userId = searchParams.get("userId");
@@ -97,7 +132,7 @@ if (!userId || !Types.ObjectId.isValid(userId!)) {
             {status:404}
         )
     }
-    const category = await Category.findOne({_id:categoryId,user:userId});
+    const category = await Category.findById(categoryId);
     
     if (!category) {
         return new NextResponse (
