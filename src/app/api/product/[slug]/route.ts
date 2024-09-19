@@ -11,11 +11,7 @@ export const GET = async (request:Request,context: { params:any}) =>{
     console.log(productSlug)
     try {
     
-      
-    
-        // check userId and productId
-    
-    
+  
         if (!productSlug ) {
             return new NextResponse(
                 JSON.stringify({message:"Inavlid or missing slug"}),
@@ -25,14 +21,8 @@ export const GET = async (request:Request,context: { params:any}) =>{
     
         await connectDb();
      
-    
-    
-      
       const product = await Product.findOne({
-        slug:productSlug,
-     
-    
-      })
+        slug:productSlug, })
     
       if (!product) {
     

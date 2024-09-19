@@ -1,16 +1,35 @@
 
+import ProductPage from '../ProductDetails'
 
-import ProductPage from './ProductDetails'
+import type { Metadata, ResolvingMetadata } from 'next';
 
+type Props = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-const page = ({params}:any) => {
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  
+const product = await fetch(`https://uniquestorebd.netlify.app/api/product/${params.slug}`).then((res) => res.json())
 
+  const previousImages = (await parent).openGraph?.images || [];
 
-  return (
-    <div>
-      <ProductPage params ={params} />
-    </div>
-  )
+  return {
+    title: product?.product.name,
+    openGraph: {
+      images: [product?.product.image, ...previousImages],
+    },
+  };
 }
 
-export default page
+const ProductDetails = ({params}:any) => {
+
+
+
+  return <ProductPage params ={params} /> ;
+};
+
+export default ProductDetails;
