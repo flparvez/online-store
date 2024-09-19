@@ -39,7 +39,7 @@ const OrderPage = ({params}) => {
         <span className="font-medium">Address:</span> {order.address}, {order.city}
       </div>
       <div className="mb-4">
-        <span className="font-medium">Total:</span> ${order.total.toFixed(2)}
+        <span className="font-medium">Total:</span> ৳{order.total.toFixed(2)}
       </div>
       <div className="mb-4">
         <span className="font-medium">Transaction ID:</span> {order.transaction}

@@ -41,9 +41,18 @@ export const checkoutApi = createApi({
       }),
       providesTags: [{ type: 'Order', id: 'LIST' }],
     }),
-    
+    // delete order by id and userId
+    deleteOrder: builder.mutation({
+      query: ({id,userId}) => ({
+        // url: `order/${id}`,
+        url: `order/${id}?userId=${userId}`,
+       
+        method: 'DELETE',
+      }),
+      invalidatesTags: [{ type: 'Order', id: 'LIST' }, { type: 'Order' }],
+    }),
 
   }),
 });
 
-export const { useAddOrderMutation, useGetOrdersQuery,useGetOrderByIdQuery,useEditOrderMutation } = checkoutApi;
+export const { useAddOrderMutation, useGetOrdersQuery,useGetOrderByIdQuery,useEditOrderMutation,useDeleteOrderMutation } = checkoutApi;
