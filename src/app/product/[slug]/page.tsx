@@ -20,7 +20,7 @@ const product = await fetch(`https://uniquestorebd.netlify.app/api/product/${par
   return {
     title: product?.product.name,
     openGraph: {
-      images: [product?.product.image, ...previousImages],
+      images: [product?.product.images, ...previousImages],
     },
   };
 }
