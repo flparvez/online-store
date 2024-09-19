@@ -11,11 +11,14 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { cn } from "@/lib/utils";
+import { useGetCategoriesQuery } from "@/store/services/CategoryApi";
 
 const EditPage = ({ params }) => {
   const router = useRouter();
   const [product, setProduct] = useState(null);
-  
+  const {data} =useGetCategoriesQuery()
+  const categories =data
+
   const {
     register,
     handleSubmit,
@@ -66,7 +69,14 @@ const EditPage = ({ params }) => {
     }
   };
 
-  const tagOptions = ["Smart Watch", "UPS", "Headphone"];
+  const tag=[
+    "Smart Watch",
+    "Tv Box",
+    "ups",
+    "headphone",
+
+  ]
+
 
   return (
 
@@ -116,10 +126,10 @@ const EditPage = ({ params }) => {
             {...register("category", { required: true })}
             className="select"
           >
-            <option value="all">All</option>
-            <option value="smart-watch">Smart Watch</option>
-            <option value="ups">UPS</option>
-            <option value="headphone">Headphone</option>
+          {categories?.map((category) => (
+            <option  key={category._id} value={category.title}>{category.title}</option>
+          ))}
+          
           </select>
         </LabelInputContainer>
 
@@ -175,16 +185,10 @@ const EditPage = ({ params }) => {
 
         <RadioGroup defaultValue="all">
           <Label>Product Tags</Label>
-          {tagOptions.map((cat) => (
-            <div className="flex items-center space-x-2" key={cat}>
-              <RadioGroupItem 
-                {...register("tags", )}
-                value={cat.toLocaleLowerCase()}
-                id={cat.toLocaleLowerCase()}
-              />
-              <Label htmlFor={cat.toLocaleLowerCase()}>
-                {cat.toLocaleLowerCase()}
-              </Label>
+          {tag.map((cat) => (
+                      <div className="flex items-center space-x-2" key={cat}>
+                        <RadioGroupItem {...register("tags", { required: true })} value={cat.toLocaleLowerCase()}  id={cat.toLocaleLowerCase()} />
+                        <Label htmlFor={cat.toLocaleLowerCase()}>{cat.toLocaleLowerCase()}</Label>
             </div>
           ))}
         </RadioGroup>

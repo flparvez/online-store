@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import { Label } from '@/components/ui/label';
 import { Input } from "@/components/ui/input";
-
+import { useGetCategoriesQuery } from "@/store/services/CategoryApi";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { cn } from "@/lib/utils";
 
@@ -30,6 +30,8 @@ type Inputs = {
 
 export default function AddProductForm() {
   const router = useRouter()
+  const {data} =useGetCategoriesQuery("")
+  const categories =data
 const [addProduct] = useAddProductMutation()
 
   // Form validation and submission logic goes here
@@ -110,11 +112,9 @@ const [addProduct] = useAddProductMutation()
       <br />
       <select defaultValue="all" {...register("category", { required: true })}  className="select ">
    
-    <option value="all">All</option>
-    <option>Harry Potter</option>
-    <option>Lord of the Rings</option>
-    <option>Planet of the Apes</option>
-    <option>Star Trek</option>
+      {categories?.map((category:any) => (
+            <option  key={category._id} value={category.title}>{category.title}</option>
+          ))}
   </select>
       </LabelInputContainer>
  
@@ -133,11 +133,10 @@ const [addProduct] = useAddProductMutation()
       <RadioGroup defaultValue="all">
       <Label htmlFor="price">Product Tags</Label>
 
-                     {tag.map((cat) => (
+      {tag.map((cat) => (
                       <div className="flex items-center space-x-2" key={cat}>
                         <RadioGroupItem {...register("tags", { required: true })} value={cat.toLocaleLowerCase()}  id={cat.toLocaleLowerCase()} />
                         <Label htmlFor={cat.toLocaleLowerCase()}>{cat.toLocaleLowerCase()}</Label>
-
       </div>
                      ))}
   </RadioGroup>
