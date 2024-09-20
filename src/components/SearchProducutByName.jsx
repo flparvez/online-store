@@ -58,11 +58,7 @@ const SearchProducutByName = () => {
               };
           }, []);
 
-          const truncateText = (text, maxLength) => {
-            if (text.length > maxLength) {
-              return text.substring(0, maxLength) + "..";
-            }
-          }
+       
           
   return (
    <div className="container mx-auto px-4 py-4">
@@ -92,7 +88,7 @@ const SearchProducutByName = () => {
          <Image width={300} height={150} src={product.images} alt={product.name} className="w-[80px] h-[80px] object-cover mb-4 rounded-lg" />
          <p className="text-indigo-600 font-bold ">৳{product.price}</p>
          
-         <h3 className="text-lg mt-4 font-semibold">{product.name}</h3>
+         <h3 className="sm:text-lg text-sm mt-4 font-semibold">{product.name}</h3>
          
         
          </div>
