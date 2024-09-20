@@ -30,7 +30,7 @@ const SearchProducutByName = () => {
             setSearchResult([]);
             return;
         }
-            const filteredProduct = products.filter(product => product.name.toLowerCase().includes(productShortName.toLowerCase()))
+            const filteredProduct = products?.filter(product => product.name.toLowerCase().includes(productShortName.toLowerCase()))
             setSearchResult(filteredProduct);
         }, [productShortName,products]);
             
