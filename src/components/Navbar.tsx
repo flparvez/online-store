@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import SearchProducutByName from '@/components/SearchProducutByName'
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Marquee from "react-fast-marquee";
@@ -92,7 +93,7 @@ const Navbar = () => {
         
         {/* Search bar */}
         <div className="px-2 w-full sm:max-w-full space-y-1">
-          <Input placeholder="Search products..." className="w-full mb-4" />
+        <SearchProducutByName />
         </div>
       </div>
 

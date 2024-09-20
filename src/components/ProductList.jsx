@@ -4,31 +4,40 @@ import {
     CardContent,
     
   } from "@/components/ui/card"
-  
-import React from "react";
-
+  import Pagination from '@/components/Pagination'  
+import React, { useState } from "react";
 import Link from "next/link";
-
-
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 
 
 
-const ProductList = ({product}) => {
+const ProductList = ({products}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(10);
 
+ // Calculate the current products
+ const indexOfLastProduct = currentPage * productsPerPage;
+ const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+ const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
   const truncateText = (text, maxLength) => {
   if (text.length > maxLength) {
     return text.substring(0, maxLength) + "...";
   }
 }
 
+
   return (
    
-    // <div className=" w-full">
+
    <Card >
-      <div >
-        <Link href={`/product/${product.slug}`} >
+      <div  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+     
+      {currentProducts.map((product) => (
+        <Link key={product._id} href={`/product/${product.slug}`} >
         <div className="relative">
           <Image width={300} height={300}
             src={product?.images}
@@ -77,28 +86,17 @@ const ProductList = ({product}) => {
           
         </CardContent>
         </Link>
+           ))}
       </div>
       
-      {/* <CardFooter>
-        {product?.stock === 0 ? (
-          <Button className="w-full opacity-60 cursor-not-allowed">
-            Out Of Stock
-          </Button>
-        ) : (
-          <Button
-            // onClick={() => handleAddtoCart(product?._id, product?.totalStock)}
-            className="w-full"
-          >
-            Add to cart
-          </Button>
-        )}
-      </CardFooter> */}
+      
+      <Pagination
+        currentPage={currentPage}
+        totalPages={Math.ceil(products.length / productsPerPage)}
+        onPageChange={paginate}
+      />
     </Card>
        
-
-
-       
-   
   );
 };
 
