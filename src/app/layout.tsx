@@ -1,6 +1,7 @@
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import "./globals.css";
 import {Provider,store} from "@/components/index"
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
+      
         className={cn(
           inter.className
         )}
@@ -38,6 +40,7 @@ export default function RootLayout({
           </div>
 
         </Provider>
+        <SpeedInsights />
       </body>
     </html>
   );

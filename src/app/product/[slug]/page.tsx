@@ -13,7 +13,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   
-const product = await fetch(`https://uniquestorebd.netlify.app/api/product/${params.slug}`).then((res) => res.json())
+const product = await fetch(`https://uniquestorebd.vercel.app/api/product/${params.slug}`).then((res) => res.json())
 
   const previousImages = (await parent).openGraph?.images || [];
 
