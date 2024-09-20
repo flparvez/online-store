@@ -4,6 +4,7 @@ import { useGetProductsQuery } from '@/store/services/prodcutApi'
 import React, { useEffect, useRef, useState } from 'react'
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 const SearchProducutByName = () => {
  
@@ -31,7 +32,7 @@ const SearchProducutByName = () => {
         }
             const filteredProduct = products.filter(product => product.name.toLowerCase().includes(productShortName.toLowerCase()))
             setSearchResult(filteredProduct);
-        }, [productShortName]);
+        }, [productShortName,products]);
             
        // handle Product
        const handleProductClick = () => {
@@ -57,7 +58,12 @@ const SearchProducutByName = () => {
               };
           }, []);
 
-
+          const truncateText = (text, maxLength) => {
+            if (text.length > maxLength) {
+              return text.substring(0, maxLength) + "..";
+            }
+          }
+          
   return (
    <div className="container mx-auto px-4 py-4">
     
@@ -68,24 +74,29 @@ const SearchProducutByName = () => {
         type="text"
      
         placeholder="Search products name..."
-        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="w-full px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
         value={productShortName} onChange={(e)=> setProductShortName(e.target.value)} />
             
                 </div>
                 {
                     productShortName && (
                         <div className=''>
-                            <h2>---:Search Result:----</h2>
+                          
                             <ul>
                                 {searchResult.length > 0 ?(
                                    searchResult.slice(0,20).map((product)=>(
                                    
                              <div key={product._id}  className="bg-white rounded-lg shadow-md p-6">
                                  <Link   href={`/product/${product.slug}`} onClick={handleProductClick}  >
-          <img src={product.images} alt={product.name} className="w-full h-20 object-cover mb-4 rounded-lg" />
-          <h3 className="text-lg font-semibold">{product.name}</h3>
-          
-          <p className="text-indigo-600 font-bold mt-2">${product.price}</p>
+         <div className='flex'>
+         <Image width={300} height={150} src={product.images} alt={product.name} className="w-[80px] h-[80px] object-cover mb-4 rounded-lg" />
+         <p className="text-indigo-600 font-bold ">৳{product.price}</p>
+         
+         <h3 className="text-lg mt-4 font-semibold">{product.name}</h3>
+         
+        
+         </div>
+         
           </Link> 
         </div>
                                 

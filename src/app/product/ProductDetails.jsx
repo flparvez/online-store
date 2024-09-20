@@ -2,15 +2,10 @@
 
 import { useDispatch } from 'react-redux';
 import { addItem } from '@/store/cartSlice';
-import {useGetProductBySlugQuery} from '@/store/services/prodcutApi'
+
 import Image from 'next/image';
-const ProductPage =({params}) => {
- 
- const {data} = useGetProductBySlugQuery(params.slug)
+const ProductPage =({product}) => {
 
-const product = data?.product;
-
-//  console.log(product)
 
   const dispatch = useDispatch();
 

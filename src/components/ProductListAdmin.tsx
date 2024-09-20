@@ -15,7 +15,7 @@ function AdminProductTile({
     <Card className="w-full max-w-sm mx-auto">
       <div>
         <div className="relative">
-        <img
+        <Image width={200} height={200}
             src={product.images}
             alt="text" 
             className="w-full h-[300px] object-cover rounded-t-lg"
