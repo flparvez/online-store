@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import SearchProducutByName from '@/components/SearchProducutByName'
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
 import Marquee from "react-fast-marquee";
 import { ShoppingCart } from 'lucide-react';

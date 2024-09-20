@@ -22,6 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    
     <html lang="en">
       <body
       
@@ -33,7 +34,7 @@ export default function RootLayout({
         <Provider store={store}>
         {/* <SideNavbar  /> */}
         {/* main page */}
-        <div className="p-4 w-full">
+        <div className="p-2 w-full">
           <Navbar  />
           {children}
           
