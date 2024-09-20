@@ -82,7 +82,7 @@ const SearchProducutByName = () => {
                                    
                              <div key={product._id}  className="bg-white rounded-lg shadow-md p-6">
                                  <Link   href={`/product/${product.slug}`} onClick={handleProductClick}  >
-          <img src={product.images} alt={product.name} className="w-full h-48 object-cover mb-4 rounded-lg" />
+          <img src={product.images} alt={product.name} className="w-full h-20 object-cover mb-4 rounded-lg" />
           <h3 className="text-lg font-semibold">{product.name}</h3>
           
           <p className="text-indigo-600 font-bold mt-2">${product.price}</p>
