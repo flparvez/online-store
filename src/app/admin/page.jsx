@@ -36,6 +36,8 @@ if (!admin) {
         )}
       >
         <SideNavbar />
+        <h2>Admin Dashboard</h2>
+        
         <Dashboard />
  
         

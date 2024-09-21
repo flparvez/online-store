@@ -5,13 +5,11 @@ import {useRouter} from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-import {useGetSingleUserQuery} from '@/store/services/UserApi'
-
 
 
 export default function LoginPage() {
     const router = useRouter();
-    const {data, isError} = useGetSingleUserQuery("")
+
  
     const [user, setUser] = React.useState({
         email: "",

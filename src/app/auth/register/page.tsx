@@ -48,7 +48,7 @@ const Register = () => {
     if (newUser) {
       
       alert("Acount Created successfully")
-       router.push('/')
+       router.push('/profile')
      }else{
       alert("User Create Failed")
      }

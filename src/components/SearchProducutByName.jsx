@@ -30,7 +30,7 @@ const SearchProducutByName = () => {
             setSearchResult([]);
             return;
         }
-            const filteredProduct = products?.filter(product => product.name.toLowerCase().includes(productShortName.toLowerCase()))
+            const filteredProduct = products?.filter(product => product?.name.toLowerCase().includes(productShortName.toLowerCase()))
             setSearchResult(filteredProduct);
         }, [productShortName,products]);
             
@@ -79,8 +79,8 @@ const SearchProducutByName = () => {
                         <div className=''>
                           
                             <ul>
-                                {searchResult.length > 0 ?(
-                                   searchResult.slice(0,20).map((product)=>(
+                                {searchResult?.length > 0 ?(
+                                   searchResult?.slice(0,20).map((product)=>(
                                    
                              <div key={product._id}  className="bg-white rounded-lg shadow-md p-6">
                                  <Link   href={`/product/${product.slug}`} onClick={handleProductClick}  >
