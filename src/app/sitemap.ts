@@ -6,7 +6,7 @@ const products = response.products;
     const baseUrl ="https://uniquestorebd.vercel.app/"
 const allProducts = products?.map((product:any) =>{
    return {
-    url:`${baseUrl}/product/${product?.slug}`,
+    url:`${baseUrl}product/${product?.slug}`,
     lastModified: product?.createdAt,
    }
 } )
