@@ -52,23 +52,23 @@ if (!products) return <h2>Loading...</h2>
     </div>
 
     {/* Product List Product Category Button */}
-    <div>
+ 
       <div className='flex justify-center'>
         <button className='py-3 px-6 mt-14 text-white bg-blue-600 rounded-md'>View All Product</button>
   
     </div>
-    </div>
+  
 
     {/* Product List Responsive Design */}
-    <section className="py-8">
-        <div className="container mx-auto px-4">
+ 
+        <div >
           
         
           
         <ProductList  products={products} />
       
         </div>
-      </section>
+  
       
 
     
