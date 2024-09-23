@@ -12,6 +12,7 @@ import 'swiper/css/navigation';
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { useGetCategoriesQuery } from '@/store/services/CategoryApi';
+import Image from 'next/image';
 
 
 const CategorySlides = () => {
@@ -41,22 +42,24 @@ const CategorySlides = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-         {data?.map((product) => (
-           <SwiperSlide key={product._id}>
-             
-             <div className="w-full rounded overflow-hidden justify-center items-center  shadow   bg-white">
-            <div className='text-center'>
 
-           
-      <img className="w-52 h-40 object-cover text-center " src={product.image} alt={product.title} />
-      </div>
-        <div className="font-bold text-xl text-center ">{product.title}</div>
+<div className="container mx-auto px-4 py-8">
+<div className="flex overflow-x-scroll scrollbar-hide">
+         {data?.map((category) => (
        
-     
+             
+             <SwiperSlide key={category._id}>
+         <div className="flex-shrink-0 w-48 h-48 m-2 bg-white rounded-lg shadow-md overflow-hidden">
+      <Image width={300} height={128} src={category.image} alt={category.title} className="w-full h-32 object-cover" />
+      <div className="p-2">
+        <h3 className="text-lg font-semibold text-center">{category.title}</h3>
+      </div>
     </div>
-   
-           </SwiperSlide>
+
+        </SwiperSlide>
          ))}
+         </div>
+         </div>
        </Swiper>
 
        

@@ -18,7 +18,7 @@ const Home = () => {
 if (!products) return <h2>Loading...</h2>
   return (
     <div>
-      {/* <SearchProductList products={products} /> */}
+  
       <div className='p-2'>
       <h2 className="text-3xl font-bold text-center mb-8">
             Feature Products
@@ -41,9 +41,9 @@ if (!products) return <h2>Loading...</h2>
            
               </div>
               {/* Category Slider With Link */}
-              <div className='mx-auto '>
+              <div className=''>
               <div className='flex justify-center mb-8'>
-              <button className='py-3 px-6 mt-14 text-white bg-blue-500  rounded-md'>Product Category</button>
+              <button className='py-3 px-6 mt-14 text-white bg-blue-500  rounded-md'> Category Slider</button>
   
     </div>
              
